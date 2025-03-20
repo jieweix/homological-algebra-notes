@@ -1,0 +1,2152 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{luatex85}
+\usepackage[all,cmtip]{xy}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pst-plot}
+\usepackage{newpx}
+\usepackage{ytableau}
+\usepackage{microtype}
+\usepackage{listings}
+
+\geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false, 
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\usepgfplotslibrary{fillbetween} 
+
+\pgfplotsset{compat=1.18}
+
+\newcommand{\tikznode}[3][inner sep=0pt]{\tikz[remember
+picture,baseline=(#2.base)]{\node(#2)[#1]{$#3$};}}
+
+\newcommand*\pp{{\rlap{\('\)}}}
+
+\ytableausetup{smalltableaux}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+ \hskip -\arraycolsep
+ \let\@ifnextchar\new@ifnextchar
+ \array{#1}}
+\makeatother
+\makeatletter
+\DeclareRobustCommand{\pns}{\mathrel{\text{$\m@th\proper@ideal$}}}
+\newcommand{\proper@ideal}{%
+ \ooalign{$\lneq$\cr\raise.22ex\hbox{$\lhd$}\cr}%
+}
+\makeatother
+
+\SelectTips{eu}{}
+\setlength{\fboxsep}{0pt}
+\setlength\parskip{0.3em}
+\setlength{\parindent}{0 pt}
+
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Hq}{\mathbb{H}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\di}{\mathrm{d}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fun}{\operatorname{Fun}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\op}{{\operatorname{op}}}
+\newcommand{\Set}{\operatorname{Set}}
+\newcommand{\Grp}{{\operatorname{Grp}}}
+\newcommand{\AbGrp}{{\operatorname{AbGrp}}}
+\newcommand{\tors}{{\operatorname{tors}}}
+\newcommand{\ab}{{\operatorname{ab}}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Frac}{\operatorname{Frac}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Mod}{\operatorname{mod}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Inf}{\operatorname{Inf}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\CoInd}{\operatorname{CoInd}}
+\newcommand{\Tot}{\operatorname{Tot}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\ca}{\mathcal{C}}
+\newcommand{\da}{\mathcal{D}}
+\newcommand{\zhat}{\widehat{\Z}}
+
+\newcommand{\dorp}{%
+\mathrel{\reflectbox{\rotatebox[origin=c]{180}{$\prod$}}}}
+
+\theoremstyle{definition}
+
+\newtheorem{defn}{Definition}[subsection]
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{lemma}[defn]{Lemma}
+\newtheorem{coro}[defn]{Corollary}
+\newtheorem{example}[defn]{Example}
+\newtheorem{exe}[defn]{Exercise}
+\newtheorem{claim}[defn]{Claim}
+\newtheorem{remark}[defn]{Remark}
+\newtheorem{defnthm}[defn]{Definition/Theorem}
+\newtheorem*{notation}{Notation}
+
+\title{MATH70063 Algebra 4 :: Lecture notes}
+\author{Lecturer: Oliver Gregory}
+\date{Last edited: \today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+
+\begin{flushright}
+\textit{Week 1, lecture 1, 9th January}
+\end{flushright}
+
+One should call this module homological algebra.
+
+\section{Basic category theory}
+\begin{defn}
+A \textit{category} $\ca$ is the data:
+\begin{itemize}
+\item a class $|\ca|$ of \textit{objects}
+\item a set $\Hom_\ca(A,B)$ for each ordered pair $(A,B)$ in $|\ca|$ of \textit{morphisms} (or \textit{arrows})
+\item a distinguished element $\id_A\in\Hom_\ca(A,A)$ for each $A\in|\ca|$
+\item a map $\circ:\Hom_\ca(B,C)\times\Hom_\ca(A,B)\rightarrow\Hom_\ca(A,C)$ for each ordered triples $(A,B,C)$ in $|\ca|$
+\end{itemize}
+such that
+\begin{itemize}
+\item Associativity: $(h\circ g)\circ f=h\circ (g\circ f)$ for all $f:A\rightarrow B,g:B\rightarrow C,h:C\rightarrow D$.
+\item Unit: $\id_B\circ f=f=f\circ\id_A$ for all $A,B\in|\ca|,f:A\rightarrow B$
+\end{itemize}
+\end{defn}
+
+\begin{example}
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item \[
+\xymatrix{
+A\ar[r]_f \ar@/_2pc/[rr]_{g\circ f}\ar@(lu,ld)[]|{\id_A} & B\ar[r]_g\ar@/^2pc/[rr]^{h\circ g}\ar@(dl,dr)[]|{\id_B} & C\ar[r]_h\ar@(ul,ur)[]|{\id_C} & D\ar@(ru,rd)[]|{\id_D}
+}
+\]
+\item The category of sets, denoted by Set: objects are sets, morphisms are functions
+\item The category of groups, denoted by Grp: objects are groups, morphisms are homomorphisms
+\item The category of $R$-modules, denoted by $R$-Mod: objects are $R$-modules, morphisms are homomorphisms
+\item The category of topological spaces, denoted by Top: objects are topological spaces, morphisms are continuous maps
+\end{enumerate}
+\end{example}
+
+\begin{defn}
+$f\in\Hom_\ca(B,C)$ is \textit{monic} if $\forall e_1,e_2:A\rightarrow B$ with $e_1\neq e_2$ one has $fe_1\neq fe_2$.
+
+$f\in\Hom_\ca(B,C)$ is \textit{epic} if $\forall g_1,g_2:C\rightarrow D$ with $g_1\neq g_2$ one has $g_1f\neq g_2f$.
+\end{defn}
+
+\begin{exe}
+\begin{enumerate}
+\item Show that monic/epic maps in Set are precisely injective/surjective functions.
+\item Show that $\Z\hookrightarrow\Q$ is epic in the category of rings.
+\end{enumerate}
+\end{exe}
+
+\begin{defn}
+$f\in\Hom_\ca(A,B)$ is an \textit{isomorphism} if $\exists g\in\Hom_\ca(B,A):gf=\id_A,\ fg=\id_B$.
+\end{defn}
+
+\begin{exe}
+Give a category with more than one objects such that every morphism is monic and epic, but not an isomorphism.
+
+\textit{Solution}.
+\[
+\xymatrix{
+A\ar[r]_f \ar@(lu,ld)[]|{\id_A} & B \ar@(ru,rd)[]|{\id_B}
+}
+\]
+\end{exe}
+
+\begin{defn}
+The \textit{opposite category} $\ca^\op$ is the category with same objects as $\ca$ but morphisms (and compositions) are reversed.
+\end{defn}
+
+\begin{defn}
+For two categories $\ca,\da$, a \textit{covariant functor} $F:\ca\rightarrow\da$ is a rule that associates to every $C\in|\ca|$ on $F(C)\in|\da|$, and to every $f:C_1\rightarrow C_2$ in $\ca$ on $F(f):F(C_1)\rightarrow F(C_2)$ in $\da$ such that
+\begin{enumerate}
+\item $F(\id_A)=\id_{F(A)} \ \forall A\in|\ca|$
+\item $F(gf)=F(g)F(f) \ \forall f,g$ that can be composed
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+A \textit{contravariant functor} $\ca\rightarrow\da$ is a covariant functor $\ca^\op\rightarrow\da$.
+\end{defn}
+
+\begin{example}
+Let $\ca$ be a category and $A\in|\ca|$, then there is a covariant functor $\Hom_\ca(A,-):\ca\rightarrow\Set$.
+\end{example}
+
+\begin{defn}
+For $F,G:\ca\rightarrow\da$, a \textit{natural transformation} $\eta:F\Rightarrow G$ is a rule associating to every $C\in|\ca|$ a morphism $\eta_C:F(C)\rightarrow G(C)$ in $|\da|$ such that $\forall f\in\Hom_\ca(C,C')$ the diagram
+\[
+\xymatrix{
+F(C)\ar[r]^{F(f)} \ar[d]_{\eta_C} & F(C')\ar[d]^{\eta_{C'}} \\
+G(C)\ar[r]_{G(f)} & G(C')
+}
+\]
+commutes. If each $\eta_C$ is an isomorphism, then $\eta$ is called a \textit{natural isomorphism}.
+\end{defn}
+
+\begin{defn}
+A functor $F:\ca\rightarrow\da$ is an \textit{equivalence of categories} if $\exists G:\da\rightarrow\ca$ and natural isomorphisms $\id_\ca\cong GF,\ \id_\da\cong FG$.
+\end{defn}
+
+\begin{exe}
+\begin{enumerate}
+\item Define the category of categories, Cat, (morphisms are functors).
+\item Let $\ca,\da$ be two categories. Define the functor category $\Fun(\ca,\da)$ (or $[\ca,\da]$). Show that the isomorphisms in $\Fun(\ca,\da)$ are precisely the natural isomorphisms.
+\item Let $k$ be a field and write $\operatorname{fdVect}_k$ for the category of finite dimensional $k$-vector spaces (morphisms are $k$-linear maps). Show that the $\operatorname{fdVect}_k$ is equivalent to $\operatorname{Mat}_k$ defined as follows: objects are non-negative integers and morphisms $m\rightarrow n$ are given by:
+\begin{itemize}
+\item if $m,n\neq 0$ then $m\rightarrow n$ are $m\times n$ matrices with coefficients in $k$
+\item if $m$ or $n=0$, then $m\rightarrow n$ is unique
+\end{itemize}
+and compositions are given by matrix multiplications.
+\end{enumerate}
+\end{exe}
+
+\begin{flushright}
+\textit{Week 2, lecture 1, 15th January}
+\end{flushright}
+
+\begin{defn}
+A functor $F:\ca\rightarrow\da$ is \textit{faithful}/\textit{full} if the induced maps on the Hom sets $\Hom_\ca(A,B)\rightarrow\Hom_\da(F(A),F(B)):f\mapsto F(f)$ is injective/surjective. If both, then $F$ is \textit{fully faithful}.
+\end{defn}
+
+\subsection{Adjoint functors}
+\begin{defn}
+A pair of functors $L:\ca\rightarrow\da,R:\da\rightarrow\ca$ are \textit{adjoint} if there is a bijection
+\[
+\tau_{\ca,\da}:\Hom_\da(L(C),D)\xrightarrow{\sim}\Hom_\ca(C,R(D))
+\]
+$\forall C\in|\ca|,\ D\in|\da|$ which is \textit{natural} in $(C,D)$, i.e. $\forall f:C\rightarrow C'$ in $\ca$ and $g:D\rightarrow D'$ in $\da$, the diagram
+\[
+\xymatrix{
+\Hom_\da(L(C'),D)\ar[r]^{-\circ L(f)}\ar[d]^{\tau_{C',D}} & \Hom_\da(L(C),D)\ar[r]^{g\circ-}\ar[d]^{\tau_{C,D}} & \Hom_\da(L(C),D')\ar[d]^{\tau_{C,D'}} \\
+\Hom_\ca(C',R(D))\ar[r]^{-\circ f} & \Hom_\ca(C,R(D))\ar[r]^{R(g)\circ-} & \Hom_\ca(C,R(D'))
+}
+\]
+commutes. In this case we say $L$ is a \textit{left adjoint} of $R$ and $R$ is a \textit{right adjoint} of $L$.
+\end{defn}
+
+\begin{exe}
+Show that there are two natural transformations $\eta:\id_\ca\Rightarrow RL$ (unit) and $\varepsilon:LR\Rightarrow\id_\da$ (co-unit) such that $R\xrightarrow{\eta R}RLR\xrightarrow{R\varepsilon}R$ is $\id_R$ and $L\xrightarrow{L\eta}LRL\xrightarrow{\varepsilon L}L$ is $\id_L$. 
+\end{exe}
+
+\begin{example}[Equivalence of categories are adjoint pairs]
+Let AbGrp be the category of abelian groups. Then we have the forgetful functor $\operatorname{Forg}:\operatorname{AbGrp}\rightarrow\operatorname{Grp}$ that ``forgets'' that a group is abelian. It's the identity on objects and morphisms, so it's fully faithful. We also have a functor in the other direction: $(-)^\ab:\operatorname{Grp}\rightarrow\operatorname{AbGrp}:G\mapsto G/[G,G]$ where $[G,G]$ is the commutator subgroup.
+
+We claim $(-)^\ab$ is the left adjoint of $\operatorname{Forg}$. Let $G\in|\operatorname{Grp}|$ and $A\in|\operatorname{AbGrp}|$. We need to show
+\[
+\begin{aligned}
+\tau_{G,A}:\Hom_\AbGrp(G^\ab,A)&\rightarrow\Hom_\Grp(G,A) \\
+(f:G^\ab\rightarrow A) &\mapsto (\overline f:G\twoheadrightarrow G^\ab\xrightarrow{f}A)
+\end{aligned}
+\]
+is a bijection and natural in $(G,A)$.
+
+$\tau_{G,A}$ is surjective: let $f:G\rightarrow A$ be a group homomorphism. Since $A$ is abelian, $f$ kills all commutators, so $f$ factors uniquely through $G^\ab$, i.e. $\exists! g$ such that \xymatrix{
+G\ar[r]^f\ar@{->>}[d] & A \\ G^\ab\ar@{.>}[ru]_{g}
+} commutes. Clearly $\tau_{G,A}(g)=f$.
+
+$\tau_{G,A}$ is injective since $\operatorname{Forg}$ is identity. Naturality is left as exercise.
+\end{example}
+
+\begin{flushright}
+\textit{Week 2, lecture 2, 15th January}
+\end{flushright}
+
+\subsection{Products and coproducts}
+\begin{defn}
+Let $I$ be an index set and a collection $\{C_i:i\in I\}$ of objects in $\ca$. A \textit{product} of $\{C_i:i\in I\}$ is an object $X\in|\ca|$ together with morphisms $\pi_i:X\rightarrow C_i$ for each $i\in I$ such that the following universal property holds: $\forall Y\in|\ca|$ and the family of morphisms $f_i:Y\rightarrow C_i,i\in I$, $\exists! f$ such that $\forall i\in I$, the diagram \xymatrix{
+& C_i \\
+Y \ar@{.>}[r]_{f} \ar[ru]^{f_i} & X\ar[u]_{\pi_i}
+} commutes. Denote the product by $\prod_{i\in I}C_i$.
+\end{defn}
+
+\begin{exe}
+Show that if a product exists, then it is unique up to isomorphism.
+\end{exe}
+
+\begin{example}
+\begin{enumerate}
+\item Products in Set is the Cartesian product of sets.
+\item In Grp, it's the usual product of groups.
+\item In $R$-Mod, it's the direct product.
+\item in Top, it is the Cartesian product of the underlying sets endowed with the product topology.
+\end{enumerate}
+\end{example}
+
+\begin{defn}
+Let $J$ be an index set and a collection $\{C_j:j\in J\}$ of objects in $\ca$. A \textit{coproduct} of $\{C_j:j\in J\}$ is an object $X\in|\ca|$ together with morphisms $\iota_j:C_j\rightarrow X$ for each $j\in J$ such that $\forall Y\in|\ca|$ with $g_j:C_j\rightarrow Y,j\in J$, $\exists! g$ such that $\forall j\in J$, the diagram \xymatrix{C_j\ar[d]_{\iota_j} \ar[dr]^{g_j}\\ X\ar@{.>}[r]_g& Y} commutes. Denote the coproduct by $\coprod_{j\in J}C_j$.
+\end{defn}
+
+\begin{exe}
+Again, coproducts are unique up to isomorphism, so we can say \underline{the} coproduct.
+\end{exe}
+
+\begin{example}
+\begin{enumerate}
+\item Coproducts in Set are disjoint unions.
+\item In $R$-Mod they are direct sums.
+\item In Grp, they are free products.
+\item In top, it is the disjoint union of underlying sets endowed with disjoint union topology.
+\end{enumerate}
+\end{example}
+
+\begin{exe}
+Show that products/coproducts in $\ca$ are precisely coproducts/products in $\ca^\op$.
+\end{exe}
+
+\section{Modules}
+\begin{defn}
+By \textit{ring}, we mean an associative ring with a unit, i.e. an abelian group $R$ with respect to + with an associative operation $\times$ such that $x(y+z)=xy+xz,(x+y)z=xz+yz$ and $\exists 1\in R:1x=x1=x \ \forall x\in R$.
+
+Denote by $R^\ast$ the (group of) units of $R$, i.e. $x\in R:\exists y\in R:xy=yx=1$.
+\end{defn}
+
+\begin{defn}
+If $R^\ast=R\backslash\{0\}$ then $R$ is a \textit{skew-field}. A commutative skew-field is a \textit{field}.
+\end{defn}
+
+\begin{example}
+\begin{itemize}
+\item $\Z,\Q,\R,\C,\F_q$ where except $\Z$ are fields
+\item $R[x_1,\ldots,x_n]$ where $R$ is a ring
+\item $\Mat_n(k)$ where $k$ is a skew-field
+\item $\Hq$ the quaternions form a skew field
+\end{itemize}
+\end{example}
+
+\begin{defn}
+A \textit{left $R$-module} $M$ is an abelian group with a function $\ast:R\times M\rightarrow M$ which encodes the left action of $R$ on $M$ such that $\forall r,r_1,r_2\in R,m,m_1,m_2\in M$,
+\begin{itemize}
+\item $r\ast (m_1+m_2)=r\ast m_1+r\ast m_2$
+\item $(r_1+r_2)\ast m=r_1\ast m+r_2\ast m$
+\item $1\ast m=m$
+\item $(r_1r_2)\ast m=r_1\ast (r_2\ast m)$
+\end{itemize}
+\end{defn}
+
+\begin{example}
+\begin{itemize}
+\item $M=R^n$ is an $R$ module with action by component-wise multiplication. Such modules are called \textit{free with finite rank}.
+\item A left ideal $I\subset R$
+\item If $L:V\rightarrow V$ is a $k$-linear map of a $k$-vector space $V$, then $V$ is a $k[x]$-module where $x$ acts as $L$
+\item Take ring $R=\Mat_n(k)$, then $M=k^n$ is a left $R$-module with action by matrices acting on column vectors
+\end{itemize}
+\end{example}
+
+\begin{defn}
+A \textit{right $R$-module} has the same definition as the left one, but replace $(r_1r_2)\ast m=r_1\ast (r_2\ast m)$ by $(r_1r_2)\ast m=r_2\ast (r_1\ast m)$.
+\end{defn}
+
+\begin{example}
+Again take $R=\Mat_n(k)$, then $M=k^n$ is also a right $R$-module with action by matrices acting on row vectors.
+\end{example}
+
+\begin{remark}
+For left $R$-modules, we usually omit the $\ast$ sign and write $rm$ for $r\ast m$, and for right $R$-modules, we write $mr$ for $r\ast m$. In this way, we have $(r_1r_2)m=r_1(r_2m)$ for left $R$-modules and $m(r_1r_2)=(mr_1)r_2$ for right $R$-modules.
+\end{remark}
+
+\begin{defn}
+For a ring $R$, the \textit{opposite ring} $R^\op$ is obtained by replacing $xy$ by $yx$. Then a left/right $R$-module is a right/left $R^\op$-module.
+\end{defn}
+
+\begin{remark}
+If $R$ is commutative, then $R=R^\op$, and there is no distinction between left and right $R$-modules.
+\end{remark}
+
+\begin{flushright}
+\textit{Week 2, lecture 3, 16th January}
+\end{flushright}
+
+\begin{example}
+\begin{itemize}
+\item Abelian groups are precisely $\Z$-module
+\item $k$-vector spaces are in particular $k$-modules
+\item A representation of a group $G$ over the field $k$ is equivalent to a $k[G]$-module
+\end{itemize}
+\end{example}
+
+\begin{defn}
+A \textit{homomorphism} $f:L\rightarrow M$ of left $R$-modules is a group homomorphism such that $f(rx)=rf(x) \ \forall r\in R,x\in M$.
+\end{defn}
+
+\begin{defn}
+$L\subset M$ is a \textit{submodule} of $M$ if $L$ is a subgroup which is stable under the $R$-action.
+
+Since $M$ is an abelian group with respect to addition, we have the quotient group $M/L$, and since $L$ is stable under $R$, we find that $M/L$ is an $R$-module. This is called a \textit{quotient module}.
+\end{defn}
+
+\begin{example}
+A left $I\subset R$ is precisely a submodule of $R$ as a $R$-module.
+\end{example}
+
+\begin{defn}
+$R$-Mod is the category of left $R$-modules with morphism being $R$-module homomorphisms.
+\end{defn}
+
+\begin{prop}
+$R$-Mod has products and coproducts.
+\end{prop}
+\begin{proof}
+First recall Cartesian products $\prod_{i\in I}X_i=\left\{(x_i)_{i\in I}:x\in X_i \ \forall i\in I\right\}$ of sets $\{X_i:i\in I\}$. If I have left $R$-modules $\{M_i:i\in I\}$, consider $\prod_{i\in I}M_i$ of the underlying sets, which has a left $R$-action by acting coordinate-wise. As an exercise, check the universal property of products. (For a fixed $i_o\in I$, there is a surjective $R$-module homomorphism $\prod_{i\in I}\twoheadrightarrow M_{i_0}:(x_i)_{i\in I}\mapsto x_{i_0}$.) This is called the \textit{direct product} of modules.
+
+The \textit{direct sum} $\bigoplus_{i\in I}M_i$ is the submodule of $\prod_{i\in I}M_i$ given by the condition that all but finitely many of the coordinates are zero. For a fixed $i_0\in I$, we have an injective left $R$-module homomorphism $M_{i_0}\hookrightarrow\bigoplus_{i\in I}M_i:x\mapsto (x_i)_{i\in I}$ where $x_i=\left\{\begin{aligned}
+&0 \quad\text{if }i\neq i_0\\
+&x \quad\text{if }i=i_0
+\end{aligned} \right.$.
+\end{proof}
+
+\begin{remark}
+From the construction it's clear that if $I$ is finite, then $\prod_{i\in I}M_i=\bigoplus_{i\in I}M_i$.
+\end{remark}
+
+\begin{defn}
+A \textit{free} $R$-module is a direct sum of copies of $R$.
+\end{defn}
+
+\begin{exe}
+Show every $k$-module is free where $k$ is a field.
+\end{exe}
+
+
+\subsection{Complexes of $R$-modules}
+\begin{defn}
+A sequence of $R$-modules and $R$-module homomorphisms
+\[
+\cdots\xrightarrow{f_{n-1}}A_n\xrightarrow{f_n}A_{n+1}\xrightarrow{f_{n+1}}A_{n+2}\xrightarrow{f_{n+2}}\cdots
+\]
+is called a \textit{complex} if $f_{n+1}\circ f_n=0 \ \forall n$. Moreover, the sequence is \textit{exact} if $\ker f_{n+1}=\im f_n \ \forall n$.
+\end{defn}
+
+\begin{defn}
+An exact sequence of the form
+\[
+\tag{\ast}
+0\rightarrow A\xrightarrow{\alpha} B\xrightarrow{\beta} C\rightarrow 0
+\]
+is called a \textit{short exact sequence}, or \textit{ses}.
+\end{defn}
+
+\begin{remark}
+Giving a ses is precisely the same thing as giving an injection $\alpha:A\hookrightarrow B$, since then automatically $C=B/\alpha(A)$ and $\beta$ is the natural quotient map. It's also precisely the same thing as giving a surjection $\beta:B\twoheadrightarrow C$, since then automatically $A=\ker\beta$ and $\alpha$ is simply inclusion.
+\end{remark}
+
+\begin{example}
+For two modules $A,C$, we always have a ses $0\rightarrow A\xrightarrow{\alpha}A\oplus C\xrightarrow{\beta}C\rightarrow 0$ where $\alpha:a\mapsto (a,0)$ and $\beta:(a,c)\rightarrow c$. Such a ses is called \textit{split}.
+\end{example}
+
+\begin{remark}
+Not every ses is split! cf.
+\[
+\begin{aligned}
+0\rightarrow\Z/2\Z&\rightarrow\Z/4\Z\rightarrow\Z/2\Z\rightarrow 0 \\
+1&\mapsto 2
+\end{aligned}
+\]
+but $\Z/4\Z\not\cong\Z/2\Z\times\Z/2\Z$.
+\end{remark}
+
+\begin{prop}
+For a ses of the form $(\ast)$, the following are equivalent:
+\begin{enumerate}
+\item The sequence is split
+\item $\exists$ an $R$-module homomorphism $\sigma:C\rightarrow B:\beta\sigma=\id_C$. In this case we say $\sigma$ is a \textit{splitting} of $\beta$.
+\item $\exists$ an $R$-module homomorphism $\rho:B\rightarrow A:\rho\alpha=\id_A$. In this case we say $\rho$ is a \textit{retraction} of $\alpha$.
+\end{enumerate}
+\end{prop}
+
+\begin{flushright}
+\textit{Week 3, lecture 1, 22nd January}
+\end{flushright}
+
+\begin{proof}
+If $(\ast)$ is split, then $B=A\oplus C$, and the splitting is given by definition of the coproduct.
+
+Now suppose $\exists$ such a $\sigma$. We need to construct an isomorphism $f:B\xrightarrow{\sim}A\oplus C$ such that
+\[
+\xymatrix @R=.1pc{
+& a\ar@{|->}[r] & (a,0)\ar@{|->}[r] & c\\
+0\ar[r] & A\ar[r] & A\oplus C\ar[r] & C\ar[r] & 0 \\ \\ \\
+0\ar[r] & A\ar[r]^\alpha\ar@{=}[uuu] & B\ar[r]^\beta\ar[uuu]_f & C\ar[r]\ar@{=}[uuu]\ar@/^1pc/[l]^\sigma & 0
+}
+\]
+commutes. We can read off $f$ from the diagram (assuming it commutes): the square on the right tells us the second coordinate is simply $\beta$ and together with the left square we have $f:b\mapsto (\alpha^{-1}(b-\sigma\beta(b)),\beta(b))$. Indeed; first this map is well defined: $\alpha$ is injective and since $\beta(b-\sigma\beta(b))=\beta(b)-\beta(\sigma(\beta(b)))=\beta(b)-\beta(b)$, we have $b-\sigma\beta(b)\in\ker\beta=\im\alpha$. Now
+\begin{itemize}
+\item $f$ is injective: suppose $f(b)=0$. Then $\beta(b)=0$, so $b\in\im\alpha$ and write $\beta=\alpha(a)$ for some $a\in A$. Then $f(b)=f(\alpha(a))=(a,0)=0$, so $a=0$ and hence $b=0$.
+\item $f$ is surjective: let $a\in A,c\in C$. Then $f:\sigma(c)+\alpha(a)\mapsto(a,c)$:
+\[
+\begin{aligned}
+\alpha^{-1}(\sigma(c)+\alpha(a)-\sigma\beta(\sigma(c)+\alpha(a)))=\alpha^{-1}(\alpha(a)-\sigma\beta\alpha(a))=a-\alpha^{-1}\sigma(0)&=a \\
+\beta(\sigma(c)+\alpha(a))=c+\beta\alpha(a)=c+0&=c
+\end{aligned}
+\]
+\end{itemize}
+The proof of the equivalence between 1 and 3 is left as an exercise.
+\end{proof}
+
+\begin{exe}
+Show that $(\ast)$ splits whenever $C$ is a free $R$-module.
+\end{exe}
+
+\subsection{Injective and projective $R$-modules}
+\begin{defn}
+For $R$-modules $A,B$, we say $A$ is a \textit{direct summand} of $B$ if $\exists$ another $R$-module $C:B=A\oplus C$.
+\end{defn}
+
+\begin{defn}
+An $R$-module $M$ is \textit{projective} if for any ses of $R$-modules of the form $(\ast)$ and any $R$-module homomorphism $f:M\rightarrow C,\ \exists$ an $R$-module homomorphism $g:M\rightarrow B:f=\beta g$. In this case we say $f$ \textit{lifts} to $g$, or $g$ is a \textit{lifting} of $f$.
+
+Note that if $C$ is projective, take $f:C\rightarrow C$ to be identity, then it follows that the ses $(\ast)$ splits. 
+\end{defn}
+
+\begin{lemma}
+\label{lemma:MprojiffMsproj}
+A direct sum is projective $\iff$ each summand is projective.
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+\item[$\impliedby$] Let $M=\bigoplus_{s\in S}M_s$ and suppose each $M_s$ is projective. Let $f:M\rightarrow C$ be an $R$-module homomorphism. Then each $\left. f\right|_{M_s}=f_s:M_s\rightarrow C$ lifts to $g_s:M_s\rightarrow B$ with $f_s=\beta g_s$. Now by definition of direct sum, only finitely many coordinates of $M$ are nonzero, then $g=\sum_{s\in S}g_s:M\rightarrow B$ is a well-defined $R$-module homomorphism, and clearly $f=\beta g$.
+\item[$\implies$] Suppose $M$ is projective and fix $s\in S$. Let $f_s:M_s\rightarrow C$ be an $R$-module homomorphism. We can extend this to an $R$-module homomorphism $f:M\rightarrow C$ by taking 0 on all summands except $s$, on which we take $f_s$. Since $M$ is projective, $f$ lifts to $g:M\rightarrow B$ with $f=\beta g$. Then $g_s=\left. g\right|_{M_s}:M_s\rightarrow B$ is a well-defined homomorphism with $f_s=\beta g_s$.
+\end{itemize}
+\end{proof}
+
+\begin{example}
+The $R$-module $R$ is projective since any homomorphism from $R$ is determined by the image of 1. Hence any free $R$-module is projective by lemma above.
+\end{example}
+
+\begin{prop}[Criterion for projectivity]
+\label{prop:criterionproj}
+An $R$-module is projective $\iff$ it is a direct summand of a free $R$-module.
+\end{prop}
+\begin{proof}
+\begin{itemize}
+\item[$\impliedby$] Since free modules are projective, the desired follows immediately from \ref{lemma:MprojiffMsproj}.
+\item[$\implies$] Any $R$-module $M$ is a quotient of a free $R$-module $F$; explicitly, take $F$ to be the $R$-module finitely generated by elements of $M$: $F=\{(r_m)_{m\in M }:r_m\in R\text{ and all but finitely many }r_m\neq 0\}$. Then there is a surjective $R$-module homomorphism $\varphi:F\twoheadrightarrow M:(r_m)_{m\in M}\mapsto\sum_{m\in M}r_mm$. If $M$ is projective, then the short exact sequence $0\rightarrow\ker\varphi\rightarrow F\rightarrow M\rightarrow 0$ splits, in particular $M$ is a direct summand of the free module $F$.
+\end{itemize}
+\end{proof}
+
+\begin{example}[Non-free projective module]
+Let $R=\Z/6\Z$ and $M=(3)\cong\Z/2\Z$. By Chinese remainder theorem, $\Z/6\Z\cong\Z/2\Z\oplus\Z/3\Z$, so $M$ is a direct summand of $R$ as an $R$-module, hence $M$ is projective, but $M$ is clearly not free since if it is, then it's copies of $\Z/6\Z$ so it has at least 6 elements, but it only has 2.
+\end{example}
+
+\begin{flushright}
+\textit{Week 3, lecture 2, 22nd January}
+\end{flushright}
+
+\begin{defn}
+An $R$-module $M$ is \textit{injective} if for any ses of $R$-modules of the form $(\ast)$ and any $R$-module homomorphism $f:A\rightarrow M,\ \exists$ an $R$-module homomorphism $g:B\rightarrow M:f=g\alpha$.
+
+Note that if $A$ is injective, take $f:A\rightarrow A$ to be identity, then it again follows that ses $(\ast)$ splits.
+\end{defn}
+
+\begin{lemma}
+\label{lemma:dirprodisinjifffactisinj}
+A direct product is injective $\iff$ each factor is injective.
+\end{lemma}
+\begin{proof}
+Write $M=\prod_{s\in S}M_S$.
+\begin{itemize}
+\item[$\impliedby$] Suppose each $M_s$ is injective and let $f:A\rightarrow M$ be an $R$-module homomorphism. Then each $f_s:A\rightarrow M\rightarrow M_s$ extends to $g_s:B\rightarrow M_s$ with $f_s=g_s\alpha$, so $\prod_{s\in S}g_s:B\rightarrow M$ is a well-defined $R$-module homomorphism with $g\alpha=f$.
+\item[$\implies$] Suppose $M$ is injective and let $f_s:A\rightarrow M_s$ for some $s\in S$. We extend this to a map $f:A\rightarrow M$ by letting all other coordinates to be 0. Then $f$ extends to $g:B\rightarrow M$ with $g\alpha=f$. Then for each $s$, $g_s:B\rightarrow M\rightarrow M_s$ satisfies $g_s\alpha=f_s$.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}[Zorn's]
+Let $S$ be an nonempty set with partial order $\leq$. A totally ordered subset $C\subset S$ is called a \textit{chain}. An upper bound of a subset $X\subset S$ is a $t\in S:t\geq x \ \forall x\in X$. Then if any chain in $S$ has an upper bound, then $S$ has a maximal element $m$, i.e. $x\leq m\implies m=x$.
+\end{lemma}
+
+\begin{thm}[Baer's criterion for injectivity]
+\label{thm:baer}
+The following are equivalent.
+\begin{enumerate}
+\item The $R$-module $M$ is injective.
+\item For any $R$-module homomorphism $f:I\rightarrow M$ where $I$ is an ideal of $R$, $\exists m\in M:f$ has the form $f(x)=xm$.
+\item For any ideal $I\subset R$, any $R$-module homomorphism $I\rightarrow M$ extends to an $R$-module homomorphism $R\rightarrow M$.
+\end{enumerate}
+\end{thm}
+\begin{proof}
+2$\iff$3: To give an $R$-module homomorphism $R\rightarrow M$, it's the same thing to specify the image of $1\in R$. So if $f(x)=xm$ for $x\in I$, then $f$ can be extended to $R$ by $1\mapsto m$. Conversely, any $I\rightarrow M$ which is a restriction of $f:R\rightarrow M$ is of the form $f(x)=xf(1)$.
+
+1$\implies$3: If $M$ is injective, consider the ses $0\rightarrow I\rightarrow R\rightarrow R/I\rightarrow 0$, then by definition any $R$ module homomorphism $I\rightarrow M$ extends to an $R$-module homomorphism $R\rightarrow M$.
+
+3$\implies$1: Suppose we have
+\[
+\xymatrix{
+0\ar[r] & A\ar[r]\ar[d]_g & B\ar[r]\ar@{.>}[dl] & C\ar[r] & 0 \\
+& M
+}
+\]
+where $B\rightarrow M$ extends $g$. Let
+\[
+S=\left\{(A',g'):A\subset A'\subset B,g':A'\rightarrow M\text{ is a }R\text{-module homomorphism}:\left. g'\right|_A=g\right\}
+\]
+and define a partial order on $S$ by: $(A',g')\leq (A'',g'')$ if $A'\subset A''$ and $\left. g''\right|_{A'}=g'$. Then each chain in $S$ has an upper bound --- take the union of all submodules $A'$ in the chain, with the corresponding $g'$. Hence Zorn's lemma says $S$ has a maximal element $(A_0,g_0)\in S$.
+
+We claim $A_0=B$. Indeed, certainly $A_0\subset B$, and for a contradiction suppose $\exists b\in B\backslash A_0$. Let $A_1=\{a+xb:a\in A_0,x\in R\}$ be an $R$-module. Then $A_0\subsetneqq A_1$, and $g_0$ extends to $g_1:A_1\rightarrow M:a+xb\mapsto g_0(a)+xm$ by specifying $g_1(b)=m$, but any $m\in M$ will do, as long as $Rb\rightarrow M:b\mapsto m$ agrees with $g_0$ on $A_0\cap Rb=\{xb\in A_0:x\in R\}$. Note that $I=\{x\in R:xb\in A_0\}$ is an ideal of $R$, so by our assumption, $m\in M$ exists as above precisely when the $R$-module homomorphism $I\rightarrow Ib\xrightarrow{g_0} M$ has the form $x\mapsto xm$ for some $m\in M$. But this is true; and the map $g_1$ we wrote is well-defined, i.e. if $a+xb=a'+x'b$ then $g_0(a)+xm=g_0(a')+x'm$; indeed, $a-a'=(x'-x)b$, so $x'-x\in I$, so $g_0(a)-g_0(a')=g_1(a)-g_1(a')=g_1(a-a')=g_1((x'-x)b)=(x'-x)g_1(b)=x'm-xm$.
+
+This contradicts that $(A_0,g_0)$ is maximal, so $A_0=B$, and we obtain an $R$-module homomorphism $B\rightarrow M$.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 3, lecture 3, 23rd January}
+\end{flushright}
+
+\begin{example}
+We use Baer's criterion to verify that $\Q$ is an injective $\Z$-module by showing a $\Z$-module homomorphism $f:I\rightarrow\Q$ extends to $\Z$-module homomorphism $f:\Z\rightarrow\Q$ for any ideal $I\subset\Z$. Since $\Z$ is a PID, write $I=n\Z$. If $f$ is the zero map or if $n=0$ we're done. Let $y=\frac{f(n)}{n}\in\Q$, and define the extension $g:\Z\rightarrow\Q:z\mapsto zy$.
+\end{example}
+
+\begin{exe}
+Let $A\in|\ca|$. Show that the contravariant functor $F_A=\Hom_\ca(-,A):\ca\rightarrow\Set$ induces a covariant functor $\Psi:\ca\rightarrow\Fun(\ca^\op,\Set)$.
+
+\textit{Solution}. Naturally, $\Psi$ sends $A\in|\ca|$ to $F_A$, and $f:A\rightarrow B$ in $\ca$ to the natural transformation $\eta_f:F_A\Rightarrow F_B$ defined as follows
+\end{exe}
+
+\begin{flushright}
+\textit{Week 4, lecture 1, 29th January}
+\end{flushright}
+
+\subsection{Hom, or what does projective/injective really mean?}
+
+Given $R$-modules $A,B$, we have an abelian group $\Hom_R(A,B)=\{R\text{-module homomorphisms }A\rightarrow B\}$ under addition of maps.
+
+\begin{prop}
+There are canonical isomorphisms
+\[
+\Hom_R\left(\bigoplus_{i\in I}A_i,B\right)\cong\prod_{i\in I}\Hom_R(A,B)
+\]
+and
+\[
+\Hom_R\left(A,\prod_{i\in I}B_i\right)\cong\prod_{i\in I}\Hom_R(A,B_i).
+\]
+\end{prop}
+\begin{proof}
+Recall the universal property that coproducts satisfy; in this case of $A_i$, we have that there are maps $\iota_i:A_i\rightarrow\bigoplus_{i\in I}A_i$ such that $\forall R$-modules $Y$ with homomorphisms $\{g_i:A_i\rightarrow Y:i\in I\},\ \exists! g:\bigoplus_{i\in I}A_i\rightarrow Y$ such that $\xymatrix{A_j\ar[rd]^{g_j}\ar[d]_{\iota_j}\\ \bigoplus_{i\in I}A_i\ar@{.>}[r]^{\exists! g} & Y}$ commutes. Then the first desired isomorphism is $f\mapsto (f\circ\iota_i)_{i\in I}$ with inverse $(f_i)_{i\in I}\mapsto\text{the unique}f$ given by the universal property (since $B$ is an $R$-module and $f_i\in\Hom_R(A_i,B)$ are homomorphisms).
+
+The second one is similar.
+\end{proof}
+
+\begin{coro}
+There are canonical isomorphisms
+\[
+\Hom_R(A_1\oplus A_2,B)\cong\Hom_R(A_1,B)\oplus\Hom_R(A_2,B)
+\]
+and
+\[
+\Hom_R(A,B_1\oplus B_2)\cong\Hom_R(A,B_1)\oplus\Hom_R(A,B_2).
+\]
+\end{coro}
+\begin{proof}
+Finite products are precisely finite coproducts.
+\end{proof}
+
+\begin{remark}
+If $I$ is infinite, then we only have
+\[
+\Hom_R\left(A,\bigoplus_{i\in I}B_i\right)\subset\Hom_R\left(A,\prod_{i\in I}B_i\right)\cong\prod_{i\in I}\Hom_R(A,B_i),
+\]
+which does not necessarily coincide with $\bigoplus_{i\in I}\Hom_R(A,B_i)$. For example, consider the case $A=\bigoplus_{i\in I}B_i$ where each $B_i$ is nonzero, then $\id$ on $\bigoplus_{i\in I}B_i$ is not in $\bigoplus_{i\in I}\Hom_R(A,B_i)$.
+
+Similarly,
+\[
+\bigoplus_{i\in I}\Hom_R(A_i,B)\subset\Hom_R\left(\prod_{i\in I}A_i,B\right)
+\]
+is not necessarily an equality; consider the case $B=\prod_{i\in I}A_i$ where each $A_i$ is nonzero, then $\id$ is not in $\bigoplus_{i\in I}\Hom_R(A_i)$.
+\end{remark}
+
+\begin{lemma}
+\label{lemma:charofprojinjbyHom}
+Let $0\rightarrow A_1\rightarrow A_2\rightarrow A_3\rightarrow 0$ be a ses of $R$-modules. Then
+\begin{enumerate}
+\item The sequence of abelian groups
+\[
+\tag{\ast}
+0\rightarrow\Hom_R(A_3,B)\rightarrow\Hom_R(A_2,B)\rightarrow\Hom_R(A_1,B)
+\]
+is exact.
+\item The sequence of abelian groups
+\[
+\tag{\ast\ast}
+0\rightarrow\Hom_R(B,A_1)\rightarrow\Hom_R(B,A_2)\rightarrow\Hom_R(B,A_3)
+\]
+is exact.
+\item Sequence $(\ast)$ extends to an ses, i.e. $\Hom_R(A_2,B)\rightarrow\Hom_R(A_1,B)$ is surjective, iff $B$ is injective.
+\item Sequence $(\ast\ast)$ extends to an ses, i.e. $\Hom_R(A_2,B)\rightarrow\Hom_R(A_3,B)$ is surjective, iff $B$ is projective.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Left as an exercise; simply writing down the definitions almost suffices.
+\end{proof}
+
+\subsection{Tensor products}
+\begin{defn}
+For a right module $A$ and a left module $B$, let $F$ be the free abelian group generated by all pairs $(a,b)$ where $a\in A,b\in B$. Let $S\subset F$ generated by elements of the form $(a+a',b)-(a,b)-(a',b),(a,b+b')-(a,b)-(a,b'),(ar,b)-(a,rb)$ where $a,a'\in A,b.b'\in B,r\in R$. The \textit{tensor product} of $A,B$, denoted by $A\otimes_RB$ is then the quotient group $F/S$. The image of a generator $(a,b)$ in $A\otimes_RB$ is denoted by $a\otimes b$. Since we mod out $S$, we have
+\[
+\begin{aligned}
+(a+a')\otimes b&=a\otimes b+a'\otimes b\\
+a\otimes (b+b')&=a\otimes b+a\otimes b'\\
+ar\otimes b&=a\otimes rb
+\end{aligned}
+\]
+$\forall a,a'\in A,b.b'\in B,r\in R$.
+\end{defn}
+
+\begin{example}
+What is $R\otimes_RM$? It's generated by $r\otimes m=1\otimes rm$, hence the map $f:M\rightarrow R\otimes_RM:m\mapsto r\otimes m$ is surjective. It's also injective: define the map $g:F\rightarrow M:(r,m)\mapsto rm$, then by axioms of modules, $g$ sends $S$ to 0, so $g$ defines a group homomorphism $F/S=R\otimes_RM\rightarrow M$, and $gf=\id_M$, so $f$ is an isomorphism.
+\end{example}
+
+\begin{remark}
+\label{remark:tensorprodeasilyvan}
+In general, $A\times B\rightarrow A\rightarrow A\otimes_RB:(a,b)\mapsto a\otimes b$ is nowhere near injective or surjective. For example, $\Z/2\Z\otimes\Z/3\Z=0$. Indeed, $2(a\otimes b)=2a\otimes b=0$, and $3(a\otimes b)=a\otimes 3b=0$.
+\end{remark}
+
+\begin{flushright}
+\textit{Week 4, lecture 2, 29th January}
+\end{flushright}
+
+\begin{remark}
+If $f:A\rightarrow A'$ is a (right) $R$-module map, then there is a natural map $f\otimes\id:A\otimes_RB\rightarrow A'\otimes_RB:x\otimes y\mapsto f(x)\otimes y$. Indeed, write $A\otimes_RB=F/S$ and $A'\otimes_RB=F'/S'$, then $f$ defines a group homomorphism $F\rightarrow F':(a,b)\mapsto (f(a),b)$, so it remains to show $f$ sends $S$ to $S'$, but
+\[
+\begin{aligned}
+f((x+x',y)-(x,y)-(x',y))&=(f(x+x'),y)-(f(x),y)-(f(x'),y)\\&=(f(x)+f(x'),y)-(f(x),y)-(f(x'),y)\in S
+\end{aligned}
+\]
+and similarly for the other two relations.
+
+If we have a left $R$-module map $g:B\rightarrow B'$, we also by a similar argument have $\id\times g:A\otimes_RB\rightarrow A\otimes_RB':x\otimes y\mapsto x\otimes g(y)$.
+
+Hence $\otimes_R$ is covariant in each argument.
+\end{remark}
+
+\begin{defn}
+The universal property of the tensor product is that if there is a function $f:A\times B\rightarrow C$ which is linear in each argument and satisfies $f(ar,b)=f(a,rb) \ \forall a\in A,b\in B,r\in R$, then $f$ is uniquely written as $f=g\phi$ for some homomorphism $g:A\otimes_RB\rightarrow C$.
+\end{defn}
+
+\begin{lemma}
+\label{lemma:tensproddistrib}
+Let $\{M_i:i\in I\}$ be a family of left $R$-modules. Then there is a canonical isomorphism
+\[
+A\otimes_R \left(\bigoplus_{i\in I}M_i\right)\cong\bigoplus_{i\in I} \left(A\otimes_R M_i\right).
+\]
+\end{lemma}
+\begin{proof}
+The natural map
+\[
+A\times \left(\bigoplus_{i\in I}A\right)\rightarrow\bigoplus_{i\in I}A\otimes_RM_i
+\]
+satisfies the universal property, hence factors through
+\[
+A\otimes_R \left(\bigoplus_{i\in I}M_i\right)\rightarrow\bigoplus_{i\in I} \left(A\otimes_R M_i\right).
+\]
+Now, the maps
+\[
+A\otimes_RM_i\rightarrow A\otimes_R\left(\bigoplus_{i\in I}M_i\right)
+\]
+gives
+\[
+\bigoplus_{i\in I}\left(A\otimes_RM_i\right)\rightarrow A\otimes_R \left(\bigoplus_{i\in I}M_i\right)
+\]
+by the universal property of coproducts. They are inverses of each other again by universal property.
+\end{proof}
+
+\begin{lemma}
+Let $0\rightarrow A_1\xrightarrow{\alpha}A_2\xrightarrow{\beta}A_3\rightarrow 0$ be a ses of right $R$-modules. For any left $R$-module $B$, the sequence of abelian groups
+\[
+A_1\otimes_R B\xrightarrow{\alpha\otimes\id} A_2\otimes_R B\xrightarrow{\beta\otimes\id} A_3\otimes_R B\rightarrow 0
+\]
+is exact.
+\end{lemma}
+\begin{proof}
+Omitted in lecture, see notes.
+\end{proof}
+
+\begin{example}
+Let $A$ be an abelian group and $n\in N$. Define $A/n=A\otimes_\Z\Z/n$. Consider the ses $0\rightarrow\Z\xrightarrow{\times n}\Z\rightarrow\Z/n\rightarrow 0$. Then by the lemma, we have the exact sequence $0\rightarrow A[n]\rightarrow A\xrightarrow{\times n}A\rightarrow A/n\rightarrow 0$ where $A[n]=\{a\in A:na=0\}$.
+\end{example}
+
+\begin{defn}
+A left $R$-module $B$ is \textit{flat} if $-\otimes_RB$ preserves short exact sequences of right $R$-modules, i.e. it preserves injections.
+\end{defn}
+\begin{example}
+We just saw that $\Z/n$ is a flat $\Z$-module.
+\end{example}
+
+\begin{prop}
+Projective modules are flat.
+\end{prop}
+\begin{proof}
+\ref{lemma:tensproddistrib} tells us that a direct sum of modules is flat $\iff$ each summand is flat, and in particular free modules are flat, but by \ref{prop:criterionproj} projective modules are precisely a summand of a free module.
+\end{proof}
+
+\subsection{Modules over integral domains}
+Let $R$ be an integral domain, i.e. a commutative ring such that $ab=0\implies a=0$ or $b=0 \ \forall a,b\in R$.
+
+\begin{defn}
+An element $m\in M$ is a \textit{torsion element} if $rm=0$ for some $r\in R\backslash\{0\}$. Denote the set of torsion elements by $M_\tors=\{m\in M:m\text{ is a torsion element}\}$, which is a submodule of $M$. If $M_\tors=0$ we say $M$ is \textit{torsion-free}. If $M_\tors=M$ we say $M$ is \textit{torsion}.
+\end{defn}
+
+\begin{example}
+$\Z$ and $\Q$ are torsion-free. $\Z/n,\Q/z$ are torsion.
+\end{example}
+
+\begin{lemma}
+Projective modules are torsion-free.
+\end{lemma}
+\begin{proof}
+Free modules are torsion-free since $R$ has no zero divisors, so their submodules are torsion-free, and by \ref{prop:criterionproj} projective modules are precisely summands of free modules.
+\end{proof}
+
+\begin{defn}
+An element $x\in M$ is \textit{(infinitely) divisible} if for every $r\in R\backslash\{0\}$, one can write $x=ry$ for some $y\in M$. Denote the set of divisible elements by $M_\div=\{m\in M:m\text{ is divisible}\}$, which is a submodule of $M$. If $M_\div=M$ we say $M$ is divisible.
+\end{defn}
+
+\begin{example}
+$\Q,\Q/\Z$ are divisible, $\Z,\Z/n$ are not.
+\end{example}
+
+\begin{lemma}
+\label{lemma:injmodarediv}
+Injective modules are divisible.
+\end{lemma}
+\begin{proof}
+Let $m\in M,r\in R\backslash\{0\}$. We need to show $\exists s\in M:m=rs$. Note that the principal ideal $I=rR$ and $R$ are isomorphic as $R$-modules: $R\rightarrow I:x\mapsto rx$. The $R$-module map $R\rightarrow M:x\mapsto xm$ composed with the inverse of that map give an $R$-module map $f:I\rightarrow M:rx\mapsto xm$.
+
+Consider the inclusion $I\hookrightarrow R$. Since $M$ is injective, by \ref{thm:baer} $f$ extends to an $R$-module map $F:R\rightarrow M$. I claim $F(1)$ works as te desired $s$. Indeed, $rs=rF(1)=F(r)=f(r)=m$.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 5, lecture 1, 5th February}
+\end{flushright}
+
+\subsubsection{Modules over principal ideal domains}
+\begin{thm}
+Let $R$ be a PID.
+\begin{enumerate}
+\item Every submodule of a free $R$-module is free.
+\item Every submodule of $R^n$ is isomorphic to $R^m$ for some $m\leq n$.
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\begin{enumerate}
+\item Let $M$ be a free $R$-module and write $M$ as $\bigoplus_{s\in S}R_s$ where each $R_s$ is a copy of $R$. Write $1_s$ for the identity of $R_s$.
+
+The well-ordering theorem says any set can be well-ordered, i.e. there is a total order such that every nonempty subset has a least element. This allows us to do transfinite induction: a statement is true for all $s\in S$ if it's true for the least element of $S$ and its truth for all $x<s$ implies its truth for $s$.
+
+Let $N$ be a submodule of $M$. Define $N_t=N\cap\bigoplus_{s\leq t}R_s$ (we've already used the total order to do this). Consider the projection of $M$ to the $t$th summand $\bigoplus_{s\in S}R_s\twoheadrightarrow R_t=R$ and restrict this to $N_t$ to obtain an $R$-module map $f_t:N_t\rightarrow R$. Then the image $f_t(N_t)$ is a $R$-submodule of $R$, i.e. an ideal. But $R$ is a PID, so $f_t(N_t)=Ra_t$ for some $a_t\in R$. If $a_t\neq 0$, choose $n_t\in N_t:f_t(n_t)=a_t$. If $a_t=0$, choose $n_t=0$. Define $N_t'$ as the submodule of $N_t$ generated by $n_s$ for $s\leq t$.
+
+Claim: $N_t'=N_t \ \forall t\in S$. We prove this by transfinite induction. The statement is clearly true when $t$ is the least element of $S$. Now suppose $N_s'=N_s \ \forall s<t$. Clearly $N_t'\subset N_t$. Any $n\in N_t$ can be written as $n=rn_t+(n-rn_t)$ where $n-rn_t$ is a finite linear combination of $1_s\in R_s$ for $s<t$. Let $q$ be the largest index used in this finite combination. Then $n-rn_t\in N_q$, so by inductive hypothesis $n-rn_t\in N_q'$. Hence $n\in N_t'$, i.e. $N_t\subset N_t'$.
+
+Hence $N$ is generated by the $n_s$ for $s\in S$. It remains to show every element of $N$ can be uniquely written as a finite linear combination of $n_s:s\in S$. For a contradiction, suppose $0=\sum_{s\in T}r_sn_s$ where $T\subset S$ is finite and $r_sn_s\neq 0 \ \forall s\in T$. Then $a_s\neq 0$. Choose $t$ to be the largest element of $T$, then $f_t$ kills all terms except possibly $r_tn_t\mapsto r_ta_t$, but $f_t(0)=0$ so $r_ta_t=0$, hence $r_t=0$, a contradiction.
+\item Let $K=\Frac R$. Then $R\subset K$ so $R^n\subset K^n$. Let $N=\bigoplus_{s\in S}R\subset R^n$. Then $N\subset N\otimes_R K\subset R^n\otimes_R K=K^n$. Hence $N\otimes_RK$ is a $K$-subspace of $K^n$, so it has a $K$-basis with size $\leq n$, but a $K$-basis of $N\otimes_RK$ is in bijection with $S$, so $|S|\leq n$.
+\end{enumerate}
+\end{proof}
+
+\begin{coro}
+\label{coro:projisfreeoverPID}
+If $R$ is a PID, then projective modules are precisely free modules.
+\end{coro}
+\begin{proof}
+This follows from \ref{prop:criterionproj} and the theorem above.
+\end{proof}
+
+\begin{thm}
+\label{thm:injisdivoverPID}
+If $R$ is a PID, then injective modules are precisely divisible modules.
+\end{thm}
+\begin{proof}
+We saw last time \ref{lemma:injmodarediv}, so it remains to show any divisible module $M$ is injective. We use \ref{thm:baer} and let $f:I\rightarrow M$ be a $R$-module map where $I\subset R$ is an ideal. Since $R$ is a PID, write $I=aR$ for some $a\in R$. Since $M$ is divisible, write $f(a)=as$ for some $s\in M$. Then $f:I\rightarrow M$ extends to $R\rightarrow M$ by $1\mapsto s$.
+\end{proof}
+
+\begin{example}
+The $\Z$-modules $\Q/\Z,\ \R/\Z,\ \Q$ are clearly divisible, hence injective.
+\end{example}
+
+\begin{flushright}
+\textit{Week 5, lecture 2, 5th February}
+\end{flushright}
+
+The lecture was not recorded; it covered Theorem 0.4 and its proof which is available in the given notes for week 5. The theorem is as the following:
+
+\begin{thm}
+\label{thm:flatistorsionfreeoverPID}
+If $R$ is a PID, then flat modules are precisely torsion-free modules.
+\end{thm}
+
+\begin{flushright}
+\textit{Week 5, lecture 3, 6th February}
+\end{flushright}
+
+\subsubsection{Enough injectives}
+\begin{thm}[$R$-Mod has enough injectives]
+\label{thm:enoughinjectives}
+Let $R$ be a ring. Every $R$-module is isomorphic to a submodule of an injective $R$-module.
+\end{thm}
+\begin{proof}
+\begin{enumerate}
+\item Claim: for every nonzero abelian group $G$, $\Hom_\Z(G,\Q/\Z)\neq 0$. Moreover, $\forall 0\neq x\in G,\ \exists f\in\Hom_\Z(G,\Q/\Z):f(x)\neq 0$.
+
+Let $C=\la x\ra\subset G$. If $C$ is finite, there is a injective homomorphism $C\hookrightarrow\Q/\Z$ by $x\mapsto\frac{1}{|C|}$. If $C$ is infinite, consider the homomorphism via $x\mapsto \frac12$. In both cases the image of $x$ is nonzero so we have a nontrivial homomorphism $C\rightarrow\Q/\Z$. Then since $\Q/\Z$ is injective, this extends to a nonzero homomorphism $G\rightarrow\Q/\Z$.
+
+For the second part, consider $R$ as a right $R$-module and let $S=\Hom_\Z(R,\Q/\Z)$. Then $S$ can be considered as a left $R$-module by the action $rf(x)=f(xr)$.
+
+\item Claim: $S$ is an injective $R$-module.
+
+Consider the canonical isomorphism of abelian groups for a $R$-module $M$
+\[
+\Hom_R(M,\Hom_\Z(R,\Q/\Z))\cong\Hom_\Z(M,\Q/\Z)
+\]
+which works like this: a map $m\mapsto\phi_m$ on the left goes to $m\mapsto\phi_m(1)$ on the right, and a map $\phi$ on the right goes to $m\mapsto (r\mapsto\phi(rm))$ on the left. Moreover, the isomorphism is functional, i.e. if $M\rightarrow N$ is an $R$-module map, the diagram
+\[
+\xymatrix{
+\Hom_R(N,S)\ar[r]^{(\ast\ast)}\ar[d]_\cong & \Hom_R(M,S)\ar[d]^\cong \\
+\Hom_\Z(N,\Q/\Z)\ar[r]_{(\ast)} & \Hom_\Z(M,\Q/\Z)
+}
+\]
+commutes. Since $\Q/\Z$ is injective, for any injective $R$-module map $M\hookrightarrow N$, any $M\rightarrow\Q/\Z$ extends to $N\rightarrow\Q/\Z$, i.e. $(\ast)$ is surjective, hence $(\ast\ast)$ is surjective as well.
+\item Claim: for any $M$, $\Hom_R(M,S)\neq 0$. Moreover, for any $0\neq m\in M,\ \exists f\in\Hom_R(M,S):f(m)\neq 0$.
+
+This is immediate now.
+
+\item Now let $I(M)$ be the product of copies of $S$ indexed by $\Hom_R(M,S)$, so by \ref{lemma:dirprodisinjifffactisinj} $I(M)$ is injective. Consider the canonical map $M\rightarrow I(M)$ by sending $m$ to the element whose coordinate with index $f\in\Hom_R(M,S)$ is $f(m)$. Then $rm$ is sent to the element whose coordinate with index $f\in\Hom_R(M,S)$ is $f(rm)=rf(m)$, so $M\rightarrow I(M)$ is a left $R$-module map. It follows from step 3 that this map is injective.
+\end{enumerate}
+\end{proof}
+
+\section{Homology and cohomology}
+\subsection{Resolutions}
+Let $R$ be a ring. A \textit{chain complex} $A_\bullet$ of $R$-modules is a sequence $\cdots\xrightarrow{d}A_{n+1}\xrightarrow{d}A_n\xrightarrow{d}A_{n-1}\xrightarrow{d}\cdots$ such that $d^2=0$, i.e. $\im d\subset\ker d$. A complex can be finite, infinite or semi-infinite. A \textit{map of chain complexes} $f_\bullet:A_\bullet\rightarrow B_\bullet$ is a collection of $R$-module maps $f_n:A_n\rightarrow B_n$ such that $df_n=f_{n-1}d \ \forall n$, i.e. the diagram
+\[
+\xymatrix{
+\cdots \ar[r]^d & A_{n+1} \ar[r]^d \ar[d]^{f_{n+1}} & A_n \ar[r]^d \ar[d]^{f_n} & A_{n-1} \ar[r]^d \ar[d]^{f_{n-1}} & \cdots \\
+\cdots \ar[r]^d & B_{n+1} \ar[r]^d & B_n \ar[r]^d & BA_{n-1} \ar[r]^d & \cdots \\
+}
+\]
+commutes.
+
+A \textit{cochain complex} of $R$-modules is a complex in reverse: $\cdots\xrightarrow{d}C^{n-1}\xrightarrow{d}C^n\xrightarrow{d}C^{n+1}\xrightarrow{d}\cdots$, denoted by $C^\bullet$, and \textit{maps of cochain complexes} are what you think.
+
+\begin{flushright}
+\textit{Week 6, lecture 1, 12th February}
+\end{flushright}
+
+\begin{defn}
+Let $A_\bullet$ be a chain complex. The $n$th \textit{homology group} is $H_n(A_\bullet)=\ker(d:A_n\rightarrow A_{n-1})/\im(d:A_{n+1}\rightarrow A_n)$. Similarly define cohomology group of cochain complexes.
+\end{defn}
+Note that $A_\bullet$ is exact $\iff H_n(A_\bullet)=0 \ \forall n$.
+
+\begin{prop}
+If $f_\bullet:A_\bullet\rightarrow B_\bullet$ is a map of complexes, then we get an induced map $f_\ast:H_n(A_\bullet)\rightarrow H_n(B_\bullet)$.
+\end{prop}
+\begin{proof}
+First let's see how $f_\bullet$ induces a map $\ker(d:A_n\rightarrow A_{n-1})\rightarrow\ker(d:B_n\rightarrow B_{n-1})$. Let $a\in\ker(d:A_n\rightarrow A_{n-1})$, i.e. $a\in A_n$ and $d(a)=0$. Then $d(f_n(a))=f_{n-1}(d(a))=0$, i.e. $f_n(a)\in\ker(d:B_n\rightarrow B_{n-1})$ as desired.
+
+It remains to see we have a map $\im(d:A_{n+1}\rightarrow A_n)\rightarrow\im(d:B_{n+1}\rightarrow B_n)$. Let $a\in\im(d:A_{n+1}\rightarrow A_n)$, i.e. $a\in A_n$ and $a=d(a')$ for some $a'\in A_{n+1}$. Hence $f_n(a)=f_n(d(a'))=d(f_{n+1}(a'))\in\im(d:B_{n+1}\rightarrow B_n)$ as desired.
+\end{proof}
+
+\begin{defn}
+$f_\bullet:A_\bullet\rightarrow B_\bullet$ is a \textit{quasi-isomorphism} if the induced maps of $n$th homology groups $f_\ast$ are isomorphisms $\forall n$.
+\end{defn}
+
+\begin{defn}
+A \textit{left resolution} of an $R$-module $M$ is a (right bounded) chain complex of $R$-modules $\cdots\xrightarrow{d}P_2\xrightarrow{d}P_1\xrightarrow{d}P_0$ together with a map $P_0\rightarrow M$ such that the complex $\cdots\xrightarrow{d}P_2\xrightarrow{d}P_1\xrightarrow{d}P_0\rightarrow M\rightarrow 0$ is exact. Denote a left resolution by $P_\bullet\rightarrow M$. If each $P_i$ is projective then $P_\bullet\rightarrow M$ is a \textit{projective resolution} of $M$.
+\end{defn}
+
+\begin{remark}
+To have a right bounded chain complex $P_\bullet$ with a homomorphism $P_0\rightarrow M$ is precisely the same data as a morphism of complexes
+\[
+\xymatrix{
+\cdots\ar[r]^d & P_2\ar[r]^d\ar[d] & P_1\ar[r]^d\ar[d] & P_0\ar[r]\ar[d] & 0 \ar[r] & \cdots \\
+\cdots\ar[r]^d & 0\ar[r]^d & 0\ar[r]^d & M\ar[r] & 0 \ar[r] & \cdots \\
+}
+\]
+and to ask for the complex $P_\bullet$ to be exact precisely means $H_n(P_\bullet)=0 \ \forall n\geq 1$ and $H_0(P_\bullet)=P_0/\im(d:P_1\rightarrow P_0)$ where $\im(d:P_1\rightarrow P_0)=\ker(P_0\rightarrow M)$ since the diagram commutes. But also $P_0\rightarrow M$ is asked to be surjective to have a left resolution, so $H_0(P_\bullet)\cong M$. Hence to ask for a left resolution is precisely asking for a right bounded complex quasi-isomorphic to $M$ (the complex with $M$ in degree 0 and 0 elsewhere).
+
+The idea is then, if I want to study a module $M$ which might be complicated, then I should find a left resolution of $M$ where each of the $P_i$'s are hopefully better behaved (i.e. projective). This idea of replacing stuff we don't understand by complexes of things we do understand gets us quite far and deep.
+\end{remark}
+
+\begin{defn}
+A \textit{right resolution} of an $R$-module $M$ is a (left bounded) cochain complex of $R$-modules $I^0\xrightarrow{d}I^1\xrightarrow{d}I^2\xrightarrow{d}\cdots$ together an $R$-module map $M\rightarrow I^0$ such that $0\rightarrow M\rightarrow I^0\xrightarrow{d}I^1\xrightarrow{d}I^2\xrightarrow{d}\cdots$ is exact. Denote this by $M\rightarrow I^\bullet$. If each $I^i$ is injective then $M\rightarrow I^\bullet$ is an \textit{injective resolution} of $M$.
+\end{defn}
+
+\begin{example}
+\begin{enumerate}
+\item The ses of abelian groups $0\rightarrow\Z\xrightarrow{\times n}\Z\rightarrow\Z/n\Z\rightarrow 0$ exhibits the 2-term complex $\Z\xrightarrow{\times n}\Z$ (together with the map $\Z\twoheadrightarrow\Z/n\Z$) as a projective resolution of the finite abelian group $\Z/n\Z$.
+\item The ses $0\rightarrow\Z\rightarrow\Q\rightarrow\Q/\Z\rightarrow 0$ exhibits the 2-term complex $\Q\rightarrow\Q/\Z$ (together with the inclusion $\Z\hookrightarrow\Q$) as an injective resolution of the abelian group $\Z$.
+\item Let $k$ be a field and consider $k$ as a $k[x]/(x^n)$-module by $x$ acting as 0. Then
+\[
+\cdots \xrightarrow{\times x^{n-1}} k[x]/(x^n) \xrightarrow{\times x} k[x]/(x^n) \xrightarrow{\times x^{n-1}} k[x]/(x^n) \xrightarrow{\times x} k[x]/(x^n)
+\]
+is an exact sequence. Together with the projection $k[x]/(x^n)\twoheadrightarrow k$, this is a projective resolution of $k$.
+\end{enumerate}
+\end{example}
+
+\begin{lemma}
+Every module has a projective and injective resolution.
+\end{lemma}
+\begin{proof}
+We know any module $M$ has a surjective map $\varepsilon:P_0\twoheadrightarrow M$ where $P_0$ is free (hence projective). Define $M_0=\ker\varepsilon$ and take a surjective map $P_1\twoheadrightarrow M_0$ where $P_1$ is free (hence projective). Let $d:P_1\rightarrow P_0$ be $P_1\twoheadrightarrow M_0\hookrightarrow P_0$. Then $\im(d:P_1\rightarrow P_0)=M_0=\ker(\varepsilon:P_0\twoheadrightarrow M)$. This gives the first part of a projective resolution. Now define $M_1=\ker(d:P_1\rightarrow P_0)$ and repeat.
+
+The injective part is left as an exercise (use that every module is isomorphic to a submodule of an injective module (\ref{thm:enoughinjectives})).
+\end{proof}
+
+\begin{flushright}
+\textit{Week 6, lecture 2, 12th February}
+\end{flushright}
+
+\begin{prop}
+\label{prop:modmapsindunicompmapsuptohomotopy}
+Suppose $P_\bullet\rightarrow M$ is a projective resolution of $M$. Let $f:M\rightarrow N$ be an $R$-module map. Then
+\begin{enumerate}
+\item For any left resolution $Q_\bullet\rightarrow N$, there exists $R$-module maps $f_n:P_n\rightarrow Q_n \ \forall n$ such that
+\[
+\xymatrix{
+\cdots\ar[r] & P_2\ar[r]^d\ar@{-->}[d]^{f_2} & P_1\ar[r]^d\ar@{-->}[d]^{f_1} & P_0\ar[r]\ar@{-->}[d]^{f_0} & M\ar[r]\ar[d]^f & 0 \\
+\cdots\ar[r] & Q_2\ar[r]^d & Q_1\ar[r]^d & Q_0\ar[r] & N\ar[r] & 0 \\
+}
+\]
+commutes.
+\item If $g_\bullet:P_\bullet\rightarrow Q_\bullet$ is another map of complexes that the above diagram commutes, then there are maps $s_n:P_n\rightarrow Q_{n+1}$ such that $f_n-g_n=s_{n-1}d+ds_n \ \forall n\geq 1$ and $f_0-g_0=ds_0$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+Read the notes.
+\end{proof}
+
+\begin{remark}
+\label{remark:chainhomotopy}
+Part 2 says $f_\bullet$ is ``unique up to homotopy''. More precisely, a \textit{chain homotopy} $s:f_\bullet\Rightarrow g_\bullet$ between two chain complex maps $f_\bullet,g_\bullet:C_\bullet\rightarrow D_\bullet$ is a sequence of $R$-module maps $s_n:C_n\rightarrow D_{n+1} \ \forall n$ such that
+\[
+\xymatrix{
+\cdots\ar[r]^d & C_{n+1}\ar[r]^d\ar@/_/[d]_{f_{n+1}}\ar@/^/[d]^{g_{n+1}} & C_n\ar[r]^d\ar@/_/[d]_{f_n}\ar@/^/[d]^{g_n}\ar[dl]^{s_n} & C_{n-1} \ar[r]^d\ar@/_/[d]_{f_{n-1}}\ar@/^/[d]^{g_{n-1}}\ar[dl]_{s_{n-1}} & \cdots \\
+\cdots\ar[r]^d & D_{n+1}\ar[r]^d & D_n\ar[r]^d & D_{n-1} \ar[r]^d & \cdots
+}
+\]
+commutes.
+\end{remark}
+
+\begin{lemma}
+\label{lemma:homotopiccompmapsindsamehomologymaps}
+Let $f_\bullet,g_\bullet:A_\bullet\rightarrow B_\bullet$ be maps of complexes. If $f_\bullet$ and $g_\bullet$ are homotopic, then they induce the same maps $f_\ast,g_\ast$ on homology.
+\end{lemma}
+\begin{proof}
+Exercise. It suffices to prove if $f_\bullet$ is homotopic to zero then $f_\ast$ is 0 on homology.
+\end{proof}
+
+Suppose I have maps of complexes $A_\bullet\rightarrow B_\bullet\rightarrow C_\bullet$. We say it is a \textit{ses of complexes} and write $0\rightarrow A_\bullet\rightarrow B_\bullet\rightarrow C_\bullet\rightarrow 0$ if for each $n$, $0\rightarrow A_n\rightarrow B_n\rightarrow C_n\rightarrow 0$ is a ses of modules.
+
+\begin{lemma}
+An ses of complexes induces a long exact sequence on homology
+\[
+\xymatrix{
+\cdots\ar[r] & H_n(A_\bullet) \ar[r] & H_n(B_\bullet)\ar[r] & H_n(C_\bullet) \ar[dll] \\
+& H_{n-1}(A_\bullet)\ar[r] & H_{n-1}(B_\bullet)\ar[r] & H_{n-1}(C_\bullet)\ar[dll] \\
+& \cdots\ar[r] & \cdots\ar[r] & \cdots\ar[dll] \\
+& H_0(A_\bullet)\ar[r] & H_0(B_\bullet)\ar[r] & H_0(C_\bullet)\ar[r] & 0
+}
+\]
+\end{lemma}
+\begin{proof}
+We use the snake lemma: a commutative diagram with exact rows
+\[
+\xymatrix{
+& L\ar[r]\ar[d]^f & M\ar[r]\ar[d]^g & N\ar[r]\ar[d]^h & 0 \\
+0\ar[r] & L'\ar[r] & M'\ar[r] & N'
+}
+\]
+induces an exact sequence
+\[
+\xymatrix{
+\ker f\ar[r] & \ker g\ar[r] & \ker h\ar[r] & \coker f\ar[r] & \coker g\ar[r] & \coker h.
+}
+\]
+To prove the snake lemma, consider
+\[
+\xymatrix{
+& 0 & 0 & 0 \\
+& {\ker f} \ar[r] & {\ker g} \ar[r] & {\ker h} \ar@{-}`r[d]`[d] & \\
+& L \ar[r] & M \ar[r] & N \ar[r] \ar@{}+<0.6cm,0cm>="p1" & 0 \\
+0 \ar[r] & L' \ar[r] \ar@{}[l]+<1cm,0cm>="p2" \ar`_l[l]+<1.03cm,0cm>`[d]`[d][d] & M' \ar[r] & N' \\
+& {\coker f} \ar[r] & {\coker g} \ar[r] & {\coker h} \\
+& 0 & 0 & 0
+\ar"1,2";"2,2" \ar"1,3";"2,3" \ar"1,4";"2,4"
+\ar"2,2";"3,2" \ar"2,3";"3,3" \ar"2,4";"3,4"
+\ar"3,2";"4,2"^f \ar"3,3";"4,3"^<<g \ar"3,4";"4,4"^h
+\ar"4,2";"5,2" \ar"4,3";"5,3" \ar"4,4";"5,4"
+\ar"5,2";"6,2" \ar"5,3";"6,3" \ar"5,4";"6,4"
+\ar@{-}"p1";"p2"|!{"2,3";"3,3"}\hole
+}
+\]
+
+where each column is exact. We apply it to
+\[
+\xymatrix{
+& A_1/d(A_2)\ar[r]\ar[d]^d & B_1/d(B_2)\ar[r]\ar[d]^d & C_1/d(C_2)\ar[r]\ar[d]^d & 0 \\
+0\ar[r] & A_0\ar[r] & B_0\ar[r] & C_0
+}
+\]
+and obtain
+\[
+\xymatrix{
+H_1(A_\bullet)\ar[r] & H_1(B_\bullet)\ar[r] & H_1(C_\bullet)\ar[r] & H_0(A_\bullet)\ar[r] & H_0(B_\bullet)\ar[r] & H_0(C_\bullet)\ar[r] & 0
+}
+\]
+where $H_0(B_\bullet)\rightarrow H_0(C_\bullet)$ is surjective since $B_0\rightarrow C_0$ is surjective. Now we do the snake to
+\[
+\xymatrix{
+& A_2/d(A_3)\ar[r]\ar[d]^d & B_2/d(B_3)\ar[r]\ar[d]^d & C_2/d(C_3)\ar[r]\ar[d]^d & 0 \\
+0\ar[r] & \ker(A_1\rightarrow A_0)\ar[r] & \ker(B_1\rightarrow B_0)\ar[r] & \ker(C_1\rightarrow C_0)
+}
+\]
+and obtain
+\[
+\xymatrix{
+H_2(A_\bullet)\ar[r] & H_2(B_\bullet)\ar[r] & H_2(C_\bullet)\ar[r] & H_1(A_\bullet)\ar[r] & H_1(B_\bullet)\ar[r] & H_1(C_\bullet)\ar[r] & 0.
+}
+\]
+If we can glue the two together and proceed similarly we are done. It remains to see that the arrows we glue are indeed the same, which can be done by staring at the two commutative diagrams of exact rows above.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 6, lecture 3, 13th February}
+\end{flushright}
+
+\subsection{Derived functors}
+Let $\ca,\ca'$ be abelian categories. (Typically $\ca=R$-Mod and $\ca'=\Z$-Mod\ $=\AbGrp$). Suppose $\ca$ has enough projectives (i.e. every object is a surjective image of a projective object). Let $F:\ca\rightarrow\ca'$ be a functor such that if $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ is an ses in $\ca$ then $F(A)\rightarrow F(B)\rightarrow F(C)\rightarrow 0 \quad (\ast)$ in $\ca'$ is exact. In this case we say $F$ is \textit{right exact}. We now want to see how far is $(\ast)$ away from an ses.
+
+\begin{defn}
+Define $L_nF:A\mapsto H_n(F(P_\bullet))$ where $P_\bullet\rightarrow A$ is a projective resolution of $A$ in $\ca$. This is called the $n$th \textit{left derived functor} of $L$.
+\end{defn}
+
+Note that $A$ doesn't have a unique projective resolution, so how is the above well-defined? i.e. How can $L_nF(A)$ be independent of $P_\bullet$?
+
+\begin{thm}
+\label{thm:derivfunc}
+\begin{enumerate}
+\item $L_0F=F$.
+\item If $Q_\bullet\rightarrow A$ is another projective resolution of $A$, then $A\mapsto H_N(F(P_\bullet))$ and $A\mapsto H_N(F(Q_\bullet))$ are naturally isomorphic functors.
+\item For any ses $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ in $\ca$ we get a long exact sequence in $\ca'$ of the form
+\[
+\xymatrix{
+\cdots\ar[r] & L_nF(A)\ar[r] & L_nF(B)\ar[r] & L_nF(C) \ar[dll] \\
+& L_{n-1}F(A) \ar[r] &L_{n-1}F(B) \ar[r] & L_{n-1}F(C)\ar[dll] \\
+& \cdots\ar[r] & \cdots\ar[r] & \cdots\ar[dll] \\
+& L_1F(A)\ar[r] & L_1F(B)\ar[r] & L_1F(C) \ar[dll] \\
+& F(A)\ar[r] & F(B)\ar[r] & F(C)\ar[r] & 0 .
+}
+\]
+\end{enumerate}
+\end{thm}
+\begin{proof}
+\begin{enumerate}
+\item Consider the ses $0\rightarrow\im(P_1\rightarrow P_0)\rightarrow P_0\rightarrow A\rightarrow 0$. Since $F$ is right exact, we have the exact sequence $F(\im(P_1\rightarrow P_0))\rightarrow F(P_0)\rightarrow F(A)\rightarrow 0$. Clearly $P_1\twoheadrightarrow \im(P_1\rightarrow P_0)$, so again since $F$ is right exact, $F(P_1)\twoheadrightarrow F(\im(P_1\rightarrow P_0))$, hence the exact sequence $F(P_1)\rightarrow F(P_0)\rightarrow F(A)\rightarrow 0$. This shows $H_0(F(P_\bullet))=F(A)$ as desired.
+\item By \ref{prop:modmapsindunicompmapsuptohomotopy} and \ref{lemma:homotopiccompmapsindsamehomologymaps}, there is a well-defined map $H_n(F(P_\bullet))\rightarrow H_n(F(Q_\bullet))$. But $P$ and $Q$ are symmetrical so we also have a map $H_n(F(Q_\bullet))\rightarrow H_n(F(P_\bullet))$. Moreover, if we compose the two maps of complexes which induce the two above maps we get identity. Hence $H_n(F(P_\bullet))\cong H_n(F(Q_\bullet))$.
+\item Postponed for a second because we need a lemma.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Horseshoe]
+Let $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ be an ses and $P_\bullet\rightarrow A$, $R_\bullet C$ be projective resolutions. Define $Q_n=P_n\oplus R_n$ for each $n$. Then one can define maps $Q_n\rightarrow Q_{n-1}$ for $n\geq 1$ and $Q_0\rightarrow B$ such that $Q_\bullet\rightarrow B$ is a projective resolution and we have a commutative diagram with exact rows
+\[
+\xymatrix{
+\vdots \ar@{^{(}->}[r]\ar[d]_d& \vdots \ar@{->>}[r]\ar[d]_d& \vdots \ar[d]_d \\
+P_1\ar@{^{(}->}[r]\ar[d]_d & Q_1\ar@{->>}[r]\ar[d]_d & R_1\ar[d]_d \\
+P_0\ar@{^{(}->}[r]\ar@{->>}[d] & Q_0\ar@{->>}[r]\ar[d] & R_0\ar@{->>}[d] \\
+A\ar@{^{(}->}[r] & B\ar[r] & C
+}
+\]
+\end{lemma}
+\begin{proof}
+Construct a map $Q_0\rightarrow B$: on $P_0$ we have $P_0\twoheadrightarrow A\hookrightarrow B$; on $R_0$ we have $R_0\twoheadrightarrow C$, but $R_0$ is projective, this lifts to a map $R_0\rightarrow B$. Now we can use the snake lemma on
+\[
+\xymatrix{
+& P_0\ar[r]\ar[d] & Q_0\ar[r]\ar[d] & R_0\ar[r]\ar[d] & 0 \\
+0\ar[r] & A\ar[r] & B \ar[r] & C
+}
+\]
+and see $\coker(Q_0\rightarrow B)=0$, so $Q_0\twoheadrightarrow B$. Now iterate for $Q_1=P_1\oplus R_1$ and so on.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 7, lecture 1, 19th February}
+\end{flushright}
+
+\subsection{Ext and Tor functors}
+\subsubsection{First principles}
+\begin{defn}
+Let $R$ be a ring.
+\begin{enumerate}
+\item Let $B$ be a left $R$-module. Then the $i$th left derived functor of $-\otimes_RB:\text{right }R\text{-modules}\rightarrow\text{abelian groups}$ is called $\Tor_i^R(-,B)$.
+\item Let $A$ be a right $R$-module. Then the $i$th right derived functor of $\Hom_R(A,-):\text{left }R\text{-modules}\rightarrow\text{abelian groups}$ is called $\Ext_R^i(A,-)$.
+\end{enumerate}
+\end{defn}
+
+\begin{remark}
+Given a right module $A$, I could've considered $F(-)=A\otimes_R -:\text{left }R\text{-modules}\rightarrow\text{abelian groups}$ and taken the $i$th left derived functor. It turns out that $L_iF(B)=\Tor_i^R(A,B)$. This is called the ``balancing of Tor''.
+
+Similarly, given a left module $B$, I could've considered $G(-)=\Hom_R(-,B):\text{right }R\text{-modules}\rightarrow\text{abelian groups}$ and taken the $i$th right derived functor. It turns out that $R^iG(A)=\Ext_R^i(A,B)$. This is called the ``balancing of Ext''. Depending on what $A,B$ are, this might makes calculations easier.
+\end{remark}
+
+\begin{example}
+\label{example:ExtTor}
+\begin{enumerate}
+\item Let $A$ be an abelian group. Compute $\Tor_i^\Z(\Z/n\Z,A)$. We saw $P_\bullet=(\Z\xrightarrow{\times n}\Z)$ together with $\Z\twoheadrightarrow\Z/n\Z$ is a projective resolution of $\Z/n\Z$. To compute $\Tor_i^\Z(\Z/n\Z,A)$, we need to compute the homology of $P_\bullet\otimes_RA$, i.e. the homology of $A\xrightarrow{\times n}A$. So we find that
+\[
+\Tor_i^\Z(\Z/n\Z,A)=\left\{
+\begin{aligned}
+A/n\qquad \text{if }i=0 \\
+A[n]\qquad\text{if }i=1 \\
+0\qquad\text{if }i\geq 2
+\end{aligned}
+\right.
+\]
+A similar calculation gives
+\[
+\Ext_\Z^i(\Z/n\Z,A)=\left\{
+\begin{aligned}
+A[n]\qquad\text{if }i=0 \\
+A/n\qquad\text{if }i=1 \\
+0\qquad\text{if }i\geq 2
+\end{aligned}
+\right.
+\]
+\item Let $n\geq 2$ and $k$ be a field. Consider $k$ as a $k[x]/(x^n)$-module via $x$ acting as 0. Compute $\Tor_i^{k[x]/(x^n)}\left(k,k[x]/(x^n)\right)$. We saw that
+\[
+\cdots \xrightarrow{\times x^{n-1}} k[x]/(x^n) \xrightarrow{\times x} k[x]/(x^n) \xrightarrow{\times x^{n-1}} k[x]/(x^n) \xrightarrow{\times x} k[x]/(x^n)
+\]
+together with $k[x]/(x^n)\twoheadrightarrow k$ is a projective resolution of $k$ by $k[x]/(x^n)$-modules. We need to compute the homology of $P_\bullet\otimes_{k[x]/(x^n)}k[x]/(x^n)$, i.e. of
+\[
+\cdots \xrightarrow{\times x^{n-1}=0} k[x]/(x^{n-1}) \xrightarrow{\times x} k[x]/(x^{n-1}) \xrightarrow{\times x^{n-1}=0} k[x]/(x^{n-1}) \xrightarrow{\times x} k[x]/(x^{n-1}).
+\]
+We find that
+\[
+\begin{aligned}
+\Tor_i^{k[x]/(x^n)}\left(k,k[x]/(x^n)\right)&=\left\{
+\begin{aligned}
+&\ker\left(k[x]/(x^{n-1})\xrightarrow{\times x}k[x]/(x^{n-1})\right) \qquad&\text{if }i\text{ is odd}\\
+&\coker\left(k[x]/(x^{n-1})\xrightarrow{\times x}k[x]/(x^{n-1})\right) \qquad&\text{if }i\text{ is even}
+\end{aligned}
+\right. \\
+&=\left\{
+\begin{aligned}
+&k[x]/(x^{n-2})\qquad&\text{if }i\text{ is odd} \\
+&k\qquad&\text{if }i\text{ is even}
+\end{aligned}
+\right.
+\end{aligned}
+\]
+\end{enumerate}
+\end{example}
+
+\begin{prop}
+\label{prop:projTorExt0}
+If $P$ is a projective right $R$-module, then $\Tor_i^R(P,B)=0 \ \forall i\geq 1$ and all left $R$-modules $B$.
+
+If $Q$ is a projective left $R$-module, then $\Ext_R^i(Q,A)=0 \ \forall i\geq 1$ and all right $R$-modules $A$.
+\end{prop}
+\begin{proof}
+The 1-term complex $P$ together with the identity map $P\rightarrow P$ is a projective resolution of $P$.
+\end{proof}
+
+\begin{prop}
+\label{prop:flatinjprojExtTor0}
+\begin{itemize}
+\item A left $R$-module $B$ is flat iff $\Tor_1^R(A,B)=0 \ \forall$ right $R$-modules $A$ (which implies $\Tor_n^R(A,B)=0 \ \forall n\geq 1$ as well).
+\item A left $R$-module $B$ is injective iff $\Ext_R^1(A,B)=0 \ \forall$ right $R$-modules $A$ (which implies $\Ext_R^n(A,B)=0 \ \forall n\geq 1$ as well).
+\item A right $R$-module $A$ is projective iff $\Ext_R^1(A,B)=0 \ \forall$ left $R$-modules $B$ (which implies $\Ext_R^n(A,B)=0 \ \forall n\geq 1$ as well).
+\end{itemize}
+\end{prop}
+\begin{proof}
+\begin{itemize}
+\item Recall that by definition, $B$ is flat iff $-\otimes_RB$ preserves ses's, and Tor, as the derived functor of $-\otimes_RB$, measures how far away $-\otimes_RB$ is from being exact.
+\item We saw $B$ is injective iff $\Hom_R(-,B)$ is exact by \ref{lemma:charofprojinjbyHom}.
+\item This similarly follows from \ref{lemma:charofprojinjbyHom}.
+\end{itemize}
+\end{proof}
+
+\subsubsection{For abelian groups}
+\begin{prop}
+For any abelian groups $A,B$, we have $\Tor_i^\Z(A,B)=0 \ \forall i\geq 2$ and $\Ext_\Z^i(A,B)=0 \ \forall i\geq 2$.
+\end{prop}
+\begin{proof}
+We know $\exists$ a surjective homomorphism $F\twoheadrightarrow B$ where $F$ is a free abelian group. Let $F'$ be the kernel. Since $\Z$ is a PID and $F'$ is a submodule of $F$, $F'$ is free. By \ref{coro:projisfreeoverPID}, $F'\rightarrow F$ together with $F\twoheadrightarrow B$ is then a projective resolution of $B$. It is a 2-term complex, so all left derived functors $L_i$ vanish for $i\geq 2$.
+
+Now by \ref{thm:enoughinjectives}, let $I$ be an injective abelian group such that there is an injection $B\hookrightarrow I$. Then $I$ is divisible by \ref{thm:injisdivoverPID}, hence $I/B$ is divisible and injective, so $I\rightarrow I/B$ together with $B\hookrightarrow I$ is an injective resolution of $B$. It is a 2-term complex, so all right derived functors $R_i$ vanish for $i\geq 2$.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 7, lecture 2, 19th February}
+\end{flushright}
+
+\begin{example}
+\begin{enumerate}
+\item We already know for any $i\geq 1$, $\Tor_i^\Z(\Z,B)=\Tor_i^\Z(A,\Z)=\Tor_i^\Z(\Q,B)=\Tor_i^\Z(A,\Q)=0$ since $\Z$ is a free $\Z$-module and $\Q$ is flat since it's torsion-free (\ref{thm:flatistorsionfreeoverPID}).
+\item I claim $\Tor_1^\Z(\Q/\Z,A)=A_\tors$. Two ways of seeing this:
+\begin{enumerate}
+\item (Imagine you know colimits) Consider $\Q/\Z$ as the colimit $\displaystyle\lim_{\underset{n}{\rightarrow}}\Z/n\Z$, then
+\[
+\Tor_i^\Z(\Q/\Z,A)=\underset{\underset{n}{\rightarrow}}{\lim}\Tor_i^\Z(\Z/n,A)=\underset{\underset{n}{\rightarrow}}{\lim}A[n]=A_\tors.
+\]
+\item We first claim that in general $\Tor_1^\Z(A,B)=\Tor_1^\Z(A,B_\tors)$. Indeed, consider the ses $0\rightarrow B_\tors\rightarrow B\rightarrow B/B_\tors \rightarrow 0$ which by \ref{thm:derivfunc} and previous proposition induces the long exact sequence
+\[
+0\rightarrow \Tor_1^\Z(A,B_\tors) \rightarrow \Tor_1^\Z(A,B) \rightarrow\Tor_1^\Z(A,B/B_\tors) \rightarrow A\otimes_\Z B_\tors \rightarrow A\otimes_\Z B\rightarrow A\otimes_\Z B/B_\tors \rightarrow 0,
+\]
+but $B/B_\tors$ is flat since it's a torsion-free $\Z$-module (\ref{thm:flatistorsionfreeoverPID}), hence by \ref{prop:flatinjprojExtTor0} $\Tor_1^\Z(A,B/B_\tors)=0$ and so $\Tor_1^\Z(A,B_\tors) \xrightarrow{\sim} \Tor_1^\Z(A,B)$.
+
+Now consider the ses $0\rightarrow\Z\rightarrow\Q\rightarrow\Q/\Z\rightarrow 0$ which induces
+\[
+\Tor_1^\Z(\Q,A_\tors)\rightarrow\Tor_1^\Z(\Q/\Z,A_\tors)\rightarrow A_\tors\rightarrow \Q\otimes_\Z A_\tors,
+\]
+where $\Q$ is flat so $\Tor_1^\Z(\Q,A_\tors)=0$ and by the same argument in \ref{remark:tensorprodeasilyvan}, $\Q\otimes_\Z A_\tors=0$, hence $\Tor_1^\Z(\Q/\Z,A_\tors)=\Tor_1^\Z(\Q/\Z,A)=A_\tors$.
+\end{enumerate}
+\end{enumerate}
+\end{example}
+
+By elementary group theory, if $A$ is a finitely generated abelian group, then $A\cong\Z^n\times F$ for some $n\geq 0$ and $F$ a product of finite cyclic groups. But $\Tor_i^\Z(-,B)$ is an additive functor, so we are reduced to computing $\Tor_i^\Z(\Z,B)$, which is 0 by \ref{coro:projisfreeoverPID} and \ref{prop:projTorExt0}, and $\Tor_i^\Z(\Z/n\Z,B)$ for various $n$, which we already did in \ref{example:ExtTor}. Similarly for $\Ext_\Z^i$. However, (again imagine you know colimits) we used that Tor and colimits interchange in 2(a) before, which, considering colimits of finitely generated abelian groups, gives us the full picture of $\Tor_i^\Z(A,B)$, but the same is not true for $\Ext_\Z^i$.
+
+\subsubsection{Ext as the group of extensions}
+Suppose we have a commutative diagram of ses of $R$-modules
+\[
+\xymatrix{
+0\ar[r] & L\ar[r]\ar[d]^f & M\ar[r]\ar[d]^g & N\ar[r]\ar[d]^h & 0 \\
+0\ar[r] & L'\ar[r] & M'\ar[r] & N'\ar[r] & 0 
+}
+\]
+If $A$ is an $R$-module, then we get connecting homomorphisms
+\[
+\partial:\Hom_R(A,N)\rightarrow\Ext_R^1(A,L),\ \partial':\Hom_R(A,N')\rightarrow\Ext_R^1(A,L')
+\]
+and a commutative square
+\[
+\xymatrix{
+\Hom_R(A,N)\ar[r]^\partial\ar[d]^{h_\ast} & \Ext_R^1(A,L)\ar[d]^{f_\ast} \\
+\Hom_R(A,N')\ar[r]^\partial' & \Ext_R^1(A,L')
+}
+\]
+
+\begin{defn}
+An ses of $R$-modules $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ is also called an \textit{extension} of $C$ by $A$.
+\end{defn}
+
+\begin{defn}
+We say two extensions of $C$ by $A$, $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ and $0\rightarrow A\rightarrow B'\rightarrow C$, are equivalent if there is a commutative diagram
+\[
+\xymatrix{
+0\ar[r] & A\ar[r]\ar[d]^= & B\ar[r]\ar[d] & C\ar[r]\ar[d]^= & 0 \\
+0\ar[r] & A\ar[r] & B'\ar[r] & C\ar[r] & 0 
+}
+\]
+(then $B\xrightarrow{\sim}B'$).
+
+This is an equivalence relation on the set of extensions of $C$ by $A$.
+\end{defn}
+
+\begin{defn}
+Given two extensions $0\rightarrow A\xrightarrow{\alpha} B\xrightarrow{\beta} C\rightarrow 0$ and $0\rightarrow A\xrightarrow{\alpha'} B'\xrightarrow{\beta'} C$, the \textit{Baer sum} is the extension $0\rightarrow A\rightarrow X\rightarrow C\rightarrow 0$ where $X$ is the homology of the complex $A\xrightarrow{(\alpha,-\alpha')}B\oplus B'\xrightarrow{\beta-\beta'}C$.
+
+$A\rightarrow X$ is induced by $(\alpha,0)$ and $X\rightarrow C$ is induced by $\beta$.
+\end{defn}
+
+\begin{lemma}
+The Baer sum turns the set of equivalence classes of extensions of $C$ by $A$ into an abelian group. The zero element is the equivalence class of split extensions, i.e. $0\rightarrow A\rightarrow A\oplus C\rightarrow C\rightarrow 0$. The inverse is ... (left as an exercise)
+\end{lemma}
+
+\begin{flushright}
+\textit{Week 7, lecture 3, 20th February}
+\end{flushright}
+
+\begin{example}
+Calculate the Baer sum of $0\rightarrow\Z\xrightarrow{\times 2}\Z\rightarrow\Z/2\Z\rightarrow 0$ with itself. By definition, this is $0\rightarrow\Z\rightarrow X\rightarrow\Z/2\Z\rightarrow 0$ where $X$ is the homology of $\Z\xrightarrow{(\times 2,\times (-2))}\Z\oplus\Z\xrightarrow{\text{1st pos mod 2 } - \text{ 2nd pos mod 2}}\Z/2\Z$, i.e.
+\[
+X=\frac{\{(x,y)\in\Z\oplus\Z:x-y\equiv 0\Mod 2\}}{\{(2x,-2x)\in\Z\oplus\Z:x\in\Z\}}=\frac{\la(1,-1),(2,0)\ra}{\la(2,-2)\ra}=\Z/2\Z\oplus\Z.
+\]
+Hence the Baer sum is
+\[
+0\rightarrow\Z\xrightarrow{(0,\times 2)}\Z/2\Z\oplus\Z\xrightarrow{p_1}\Z/2\Z\rightarrow 0,
+\]
+the usual split extension.
+\end{example}
+
+\begin{defn}
+The \textit{class} of an extension $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ is the image of $\id_C\in\Hom_R(C,C)$ under $\partial:\Hom_R(C,C)\rightarrow\Ext_R^1(C,A)$. As an exercise, show that equivalent extensions have the same class.
+\end{defn}
+
+\begin{thm}
+Now we have a well-defined map
+\[
+\begin{aligned}
+\{\text{extensions of }C\text{ by }A\}/\text{equivalence}&\rightarrow\Ext_R^1(C,A) \\
+(0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0)&\mapsto\partial(\id_C)
+\end{aligned}
+\]
+This is a group isomorphism.
+\end{thm}
+\begin{proof}
+Let $x\in\Ext_R^1(C,A)$, choose an injection $A\hookrightarrow I$ where $I$ is an injective $R$-module, and let $M=A/I$. We have the ses $0\rightarrow A\rightarrow I\xrightarrow{\mu}M\rightarrow 0$, which induces $\Hom_R(C,I)\xrightarrow{\mu_\ast}\Hom_R(C,M)\rightarrow\Ext_R^1(C,A)\rightarrow\Ext_R^1(C,I)$, but $I$ is injective, so $\Ext_R^1(C,I)=0$ by \ref{prop:flatinjprojExtTor0}. Let $\phi:C\rightarrow M$ be an $R$-module map such that $\phi$ is mapped to $x$, and $X\subset I\oplus C$ given by $\ker(I\oplus C\xrightarrow{\mu-\phi}M)$. Then we have a commutative diagram of ses's
+\[
+\xymatrix{
+0\ar[r]& A\ar[r]& I\ar[r]^\mu & M\ar[r]& 0 \\
+0\ar[r]& A\ar[r]\ar@{=}[u] & X\ar[r]\ar[u] & C\ar[r]\ar[u]_\phi & 0
+}
+\]
+and a commutative square
+\[
+\xymatrix{
+\Hom_R(C,M)\ar[r]^{\partial'} & \Ext_R^1(C,A) \\
+\Hom_R(C,C)\ar[r]^\partial \ar[u]^{\phi_\ast} & \Ext_R^1(C,A)\ar@{=}[u]
+}
+\]
+So $\partial(\id_C)=(\partial'\circ\phi_\ast)(\id_C)=\partial'(\phi)=x$. Hence $0\rightarrow A\rightarrow X\rightarrow C\rightarrow 0$ is an extension of $C$ by $A$ whose class is $x\in\Ext_R^1(C,A)$. We've proved surjection.
+
+If $\phi'\in\Hom_R(C,M)$ is another lifting of $x$, then $\phi'=\phi+\mu\rho$ for some $\rho:C\rightarrow I$. The automorphism of $I\otimes C$ via $(a,b)\mapsto (a+\rho(b),b)$ identifies $X_\phi$ and $X_{\phi'}$. Compatibility can be seen with maps $X\rightarrow C$ and $A\rightarrow X$; so the extension of $C$ by $A$ constructed from $\phi'$ is equivalent to the extension constructed from $\phi$. We've proved injection.
+
+\begin{flushright}
+\textit{Week 8, lecture 1, 26th February}
+\end{flushright}
+
+Now that we proved the map is bijective, to show it's a group isomorphism, it remains to show that it takes the Baer sum of extensions to the sum of classes.
+
+Suppose $x_1,x_2\in\Ext_R^1(C,A)$ come from $\phi_1,\phi_2\in\Hom_R(C,C)$ (i.e. $x_i=\partial(\phi_i)$) and let $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ and $0\rightarrow A\rightarrow B'\rightarrow C\rightarrow 0$ be corresponding extensions. Consider the diagram
+\[
+\xymatrix{
+0\ar[r] & A\ar[r] & I\ar[r]^\mu & M\ar[r] & 0 \\
+0\ar[r] & A\oplus A \ar[u]_{(x,y)\mapsto x+y} \ar[r] & B\oplus B' \ar[u] \ar[r] & C\oplus C \ar[u]_{(x,y)\mapsto \phi_1(x)+\phi_2(y)} \ar[r] & 0
+}
+\]
+which we claim commutes. Indeed, let $A_0=\ker(A\oplus A\rightarrow A)=\{(x,-x)\in A\oplus A\}$, which is a copy of $A$, and hence the diagram
+\[
+\xymatrix{
+0\ar[r] & A\ar[r] & I\ar[r]^\mu & M\ar[r] & 0 \\
+0\ar[r] & (A\oplus A)/A_0 \ar@{=}[u] \ar[r] & (B\oplus B')/A_0= \ar[u] \ar[r] & C\oplus C \ar[u] \ar[r] & 0
+}
+\]
+commutes. Now consider $C=\{(x,x):x\in C\}\subset C\oplus C$ and let $X$ be its preimage in $(B\oplus B')/A_0$. Then we have
+\[
+\xymatrix{
+0\ar[r] & A\ar[r] & I\ar[r]^\mu & M\ar[r] & 0 \\
+0\ar[r] & A\ar@{=}[u] \ar[r] & X\ar[r]\ar[u] & C\ar[r]\ar[u] & 0
+}
+\]
+where the bottom row is the Baer sum of the two extension we started off with. Restricting $C\oplus C\rightarrow M$ gives the map $\phi_1+\phi_2:C\rightarrow M$, i.e. the class of the bottom row is $x_1+x_2\in\Ext_R^1(C,A)$.
+\end{proof}
+
+\subsection{Group rings}
+Let $G$ be a group. The \textit{group ring} (with integer coefficients) $\Z[G]$ of $G$ is a free $\Z$-module with generators $g\in G$, with multiplication given by the condition that on generators $g,h$, we have $gh\in \Z[G]$ is the generator $gh\in G$, and extended by linearity.
+
+The elements of $\Z[G]$ are written as $\sum_{g\in G}a_gg$ where $a_g\in\Z$. The unit in $\Z[G]$ is $1:=1e$ where $e$ is the identity of $G$.
+
+(!) $\Z[G]$ is a ring, but it's only commutative if $G$ is abelian.
+
+The generators of $\Z[G]$ associated to $g\in G$ are called the \textit{canonical generators}.
+
+\begin{example}
+\begin{enumerate}
+\item Let $G=C_n$ be the cyclic group with generator $s$. Then $\Z[G]=\Z\oplus\Z s\oplus\cdots\oplus\Z s^{n-1}$ with multiplication given by $s\sum_{i=0}^{n-1}a_is^i=a_{n-1}+\sum_{i=1}^{n-1}a_{i-1}s^i$.
+\item Let $G=\Z$ with generator $t$. Then $\Z[G]=\cdots\oplus\Z t^{-1}\oplus\Z\oplus\Z t\oplus\Z t^2\oplus\cdots$ with $t$ acting as $t\cdot t^i=t^{i+1}$; hence $\Z[G]=\Z(\!(t)\!)$ (Laurent series ring).
+\end{enumerate}
+\end{example}
+
+(!) Sometimes people call a $\Z[G]$-module a $G$-module.
+
+\begin{defn}
+For a $\Z[G]$-module $M$, define $M^G=\{m\in M:gm=m \ \forall g\in G\}$.
+\end{defn}
+
+\begin{defn}
+A $\Z[G]$-module $M$ is \textit{trivial} if the $G$-action on $M$ is trivial, i.e. every $g\in G$ acts as the identity.
+
+$M^G$ is then the maximal trivial $\Z[G]$-submodule of $M$, and $M$ is trivial $\iff M=M^G$.
+\end{defn}
+
+\begin{defn}
+For a $\Z[G]$-module $M$, define $M_G=M/\la m-gm:m\in M,g\in G\ra$. This is the largest $G$-invariant quotient module of $M$.
+\end{defn}
+
+\begin{flushright}
+\textit{Week 8, lecture 2, 26th February}
+\end{flushright}
+
+\begin{prop}
+\begin{enumerate}
+\item The kernel $I$ of the map $\sigma:\Z[G]\rightarrow\Z:\sum_{g\in G}a_gg\mapsto \sum_{g\in G}a_g$, which is a 2-sided ideal called the \textit{augmentation ideal}, has a $\Z$-basis $\{1-g:g\in G\backslash\{e\}\}$. In particular, $\Z[G]_G=\Z[G]/I\cong\Z$.
+\item Let $G$ be finite and define $N=\sum_{g\in G}g\in\Z[G]$, the \textit{norm element}. Then $N$ is in the centre of $\Z[G]$ and $\Z[G]^G=\Z N$.
+
+(!) Note that if $G$ is not finite, say $G=\Z$, then $\Z[\Z]^\Z=0$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\begin{enumerate}
+\item $\sigma$ is a $\Z[G]$-module map where $\Z$ is a trivial $\Z[G]$-module, so $I$ is indeed a 2-sided ideal. The part about the basis is clear.
+\item Note that $gN=g\left(\sum_{g\in G}g\right)=\sum_{g\in G}g=N$.
+\end{enumerate}
+\end{proof}
+
+\begin{defn}
+For a $\Z[G]$-module $M$, the $n$th \textit{group cohomology} of $G$ with $M$ coefficients is $H^n(G,M)=\Ext_{\Z[G]}^n(\Z,M)$. Similarly, the $n$th group homology of $G$ with $M$ coefficients is $H_n(G,M)=\Tor_n^{\Z[G]}(\Z,M)$.
+\end{defn}
+
+\begin{example}
+\label{example:grpcohomo}
+\begin{enumerate}
+\item $H^0(G,M)=\Hom_{\Z[G]}(\Z,M)=M^G$.
+\item $H_0(G,M)=\Z\otimes_{\Z[G]}M=M_G$.
+\item Cohomology of cyclic groups: \begin{itemize}
+\item let $G=\Z$ with generator $t$. Then $0\rightarrow\Z[\Z]\xrightarrow{1-t}\Z[\Z]$ together with $\sigma:\Z[\Z]\twoheadrightarrow\Z$ is a projective resolution of $\Z$ by $\Z[\Z]$-modules. So
+\[
+H_i(\Z,M)=\left\{
+\begin{aligned}
+M_G \qquad\text{if }i=0 \\
+M^G \qquad\text{if }i=1 \\
+0 \qquad\text{if }i\geq 2
+\end{aligned}
+\right. ,\qquad \text{and } H^i(\Z,M)=\left\{
+\begin{aligned}
+M^G \qquad\text{if }i=0 \\
+M_G \qquad\text{if }i=1 \\
+0 \qquad\text{if }i\geq 2
+\end{aligned}
+\right.
+\]
+\item now let $G=C_m$ with generator $s$. Then $\cdots\rightarrow\Z[C_m]\xrightarrow{N}\Z[C_m]\xrightarrow{1-s}\Z[C_m]$ where $N=1+s+\cdots+s^{n-1}$ together with $\sigma:\Z[C_m]\twoheadrightarrow\Z$ is a projective resolution of $\Z$ by $\Z[C_m]$-modules. So
+\begin{thm}
+\begin{enumerate}
+\item
+\[
+H^n(C_m,M)=\left\{
+\begin{aligned}
+&M^G \qquad &\text{if }n=0\\
+&\frac{\ker(M\xrightarrow{N}M)}{(1-s)M} \qquad &\text{if }n\geq 1\text{ is odd} \\
+& M^G/NM\qquad&\text{if }n\geq 2\text{ is even}
+\end{aligned}
+\right.
+\]
+\item
+\[
+H_n(C_m,M)=\left\{
+\begin{aligned}
+&M_G \qquad &\text{if }n=0\\
+&M^G/NM \qquad &\text{if }n\geq 1\text{ is odd} \\
+& \frac{\ker(M\xrightarrow{N}M)}{(1-s)M}\qquad&\text{if }n\geq 2\text{ is even}
+\end{aligned}
+\right.
+\]
+\end{enumerate}
+\end{thm}
+\end{itemize}
+\end{enumerate}
+\end{example}
+
+\begin{flushright}
+\textit{Week 8, lecture 3, 27th February}
+\end{flushright}
+
+\begin{prop}
+\[
+\Hom_\Z(\Q/\Z,\Q/\Z)\cong\left\{(a_1,a_2,\ldots)\in\prod_{n=1}^\infty\Z/n\Z:\forall m:m\mid n,\ a_n\equiv a_m\Mod m\right\}.
+\]
+This is a ring under component-wise addition and multiplication. Denote it by $\zhat$. If you know the (now mysterious) mastery material, you can write $\zhat=\underset{\leftarrow}{\lim} \Z/n\Z$ with respect to the map $\Z/n\Z\xrightarrow{\Mod m}\Z/m\Z$ (note that the condition is equivalent to $a_n\mapsto a_m$ under this map).
+\end{prop}
+\begin{proof}
+Given $a\in\zhat$, define $\phi_a:\Q/\Z\rightarrow\Q/\Z$ by $\frac{m}{n}\mapsto a_n\frac{m}{n}$. We first show $\phi_a$ is indeed a group homomorphism. Indeed,
+\[
+\phi_a\left(\frac{m_1}{n_1}+\frac{m_2}{n_2}\right)=\phi_a\left(\frac{n_2m_1+n_1m_2}{m_1m_2}\right)=a_{n_1n_2}\frac{n_2m_1+n_1m_2}{m_1m_2}
+\]
+and
+\[
+\phi_a\left(\frac{m_1}{n_1}\right)+\phi_a\left(\frac{m_2}{n_2}\right)=a_{n_1}\frac{m_1}{n_1}+a_{n_2}\frac{m_2}{n_2}=\frac{a_{n_1}n_2m_1+a_{n_2}n_1m_2}{n_1n_2},
+\]
+but $a_{n_1n_2}\equiv a_{n_1}\Mod n_1$ and $\equiv a_{n_2}\Mod n_2$, i.e. $a_{n_1n_2}=a_{n_1}+sn_1=a_{n_2}+tn_2$ for some $s,t\in\Z$, hence
+\[
+\begin{aligned}
+\frac{a_{n_1}n_2m_1+a_{n_2}n_1m_2}{n_1n_2}&=\frac{(a_{n_1n_2}-sn_1)n_2m_1+(a_{n_1n_2}-tn_2)n_1m_2}{n_1n_2}=a_{n_1n_2}\frac{n_2m_1+n_1m_2}{m_1m_2}-\frac{sn_1n_2m_1}{n_1n_2}-\frac{tn_1n_2m_2}{n_1n_2}\\
+&=a_{n_1n_2}\frac{n_2m_1+n_1m_2}{m_1m_2}-sm_1-tm_2=a_{n_1n_2}\frac{n_2m_1+n_1m_2}{m_1m_2}
+\end{aligned}
+\]
+since $sm_1+tm_2\in\Z$.
+
+Now clearly $a\mapsto\phi_a$ is by construction a homomorphism. It remains to show it's a bijection. We do this by writing down the inverse. Given $\psi\in\Hom_\Z(\Q/\Z,\Q/\Z)$, define $a_\psi=\left(\psi(1),2\psi\left(\frac12\right),3\psi\left(\frac13\right),\ldots\right)\in\prod_{n=1}^\infty\Z/n\Z$. First see that indeed $a_\psi\in\zhat$. Indeed, if $m\mid n$, write $n=mx$ for some $x\in\Z$, then
+\[
+a_n-a_m=n\psi\left(\frac1n\right)-m\psi\left(\frac1m\right)=mx\psi\left(\frac{1}{mx}\right)-m\psi\left(\frac1m\right)\equiv 0\Mod m .
+\]
+The fact that $\psi\mapsto a_\psi$ is a homomorphism follows from that $\psi$ is a homomorphism.
+
+It remains to see the two homomorphisms we defined are inverses:
+\[
+\phi_{a_\psi}\left(\frac{m}{n}\right)=n\psi\left(\frac1n\right)\frac{m}{n}=m\psi\left(\frac1n\right)=\psi\left(\frac{m}{n}\right)
+\]
+and
+\[
+a_{\phi_a}=\left(a_1\cdot 1,2\left(a_2\frac12\right),3\left(a_3\frac13\right),\ldots\right)=(a_1,a_2,a_3,\ldots)=a.
+\]
+\end{proof}
+
+Again if you know the mastery material, $\Hom_\Z\left(\underset{\rightarrow}{\lim}A_i,B\right)\cong\underset{\leftarrow}{\lim}\Hom_\Z(A_i,B)$. Also, we worked out in coursework 1 that $\Hom_\Z(\Z/n\Z,\Q/\Z)=\Z/n\Z$. Combining these two facts we easily have $\Hom_\Z(\Q/\Z,\Q/\Z)=\Hom_\Z\left(\underset{\rightarrow}{\lim}\Z/n\Z,\Q/\Z\right)=\underset{\leftarrow}{\lim}\Hom_\Z(\Z/n\Z,\Q/\Z)=\underset{\leftarrow}{\lim}\Z/n\Z=\zhat$.
+
+How is this useful? Consider the ses $0\rightarrow\Z\rightarrow\Q\rightarrow\Q/\Z\rightarrow 0$ which by $\Hom_\Z(-,\Q/\Z)$ induces the long $0\rightarrow\Hom_\Z(\Q/\Z,\Q/\Z)\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Hom_\Z(\Z,\Q/\Z)\rightarrow\Ext_\Z^1(\Q/\Z,\Q/\Z)\rightarrow\cdots$, where we just calculated $\Hom_\Z(\Q/\Z,\Q/\Z)=\zhat$, and by \ref{prop:flatinjprojExtTor0} and \ref{thm:injisdivoverPID} $\Ext_\Z^1(\Q/\Z,\Q/\Z)=0$, and since a $\Z$-homomorphism $\Z\rightarrow\Q/\Z$ is given by its image of 1, $\Hom_\Z(\Z,\Q/\Z)=\Q/\Z$. Hence we have an ses $0\rightarrow\zhat\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Q/\Z\rightarrow 0$. Consider $\Hom_\Z(\Q,\Q/\Z)$ as a $\Q$-vector space. Then one has $\Tor_1^\Z(\Q/\Z,\Q)\rightarrow\zhat\otimes\Q\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Q/\Z\otimes\Q$, but $\Tor_1^\Z(\Q/\Z,\Q)=0$ by \ref{prop:flatinjprojExtTor0} and \ref{thm:flatistorsionfreeoverPID}, and any tensor product with a torsion is 0, hence $\Hom_\Z(\Q,\Q/\Z)\cong\zhat\otimes\Q=\A_\Q$ (the ring of adèles of $\Q$).
+
+\begin{flushright}
+\textit{Week 9, lecture 1, 5th March}
+\end{flushright}
+
+\subsection{Standard resolution}
+
+Let $P_n=\Z[G^{n+1}]$ with canonical generators $(g_0,\ldots,g_n)$ where $g_i\in G$. Make $P_n$ a $\Z[G]$-module via $g(g_0,\ldots,g_n)=(gg_0,\ldots,gg_n)$.
+
+\begin{lemma}
+For $n\geq 1$, $P_n$ is a free $\Z[G]$-module, and $P_n=\Z[G]\otimes_\Z Q_n$ where $Q_n$ is the free abelian group generated by $(e,a_1,a_1a_2,\ldots,a_1a_2\cdots a_n)$ for every $(a_1,\ldots,a_n)\in G^n$. 
+\end{lemma}
+\begin{proof}
+For each $a=(a_1,\ldots,a_n)\in G^n$ define $P_n(a)$ as the $\Z[G]$-submodule of $P_n$ generated as an abelian group by $(g,ga_1,ga_1a_2,\ldots,ga_1a_2\cdots a_n) \ \forall g\in G$. So
+\[
+P_n(a)=\bigoplus_{g\in G}\Z (g,ga_1,\ldots,ga_1\cdots a_n)=\Z[G](e,a_1,\ldots,a_1\cdots a_n),
+\]
+i.e. $P_n(a)\cong \Z[G]$. By definition of $P_n$,
+\[
+P_n=\bigoplus_{a\in G}P_n(a)\cong\bigoplus_{a\in G}\Z[G],
+\]
+so $P_n$ is a free $\Z[G]$-module and $P_n\cong\Z[G]\otimes_\Z Q_n$.
+\end{proof}
+
+Define $d:P_n\rightarrow P_{n-1}$ by \[(g_0,\ldots,g_n)\mapsto\sum_{i=0}^n (-1)^i (g_0,\ldots,g_{i-1},g_{i+1},\ldots,g_n).\]
+
+\begin{lemma}
+$\cdots\rightarrow\Z[G^3]\xrightarrow{d}\Z[G^2]\xrightarrow{d}\Z[G]\xrightarrow{\sigma}\Z\rightarrow 0$ is an exact complex, i.e. $P_\bullet$ together with $\sigma:\Z[G]\rightarrow\Z$ is a projective resolution of $\Z$ by $\Z[G]$-modules.
+\end{lemma}
+\begin{proof}
+It's easy to check $d^2=0$, so $P_\bullet$ is a complex. To prove exactness, it suffices to show $\id:P_\bullet\rightarrow P_\bullet$ is chain homotopic to the zero map. We construct maps $s_n:P_n\rightarrow P_{n+1}$ such that $\id=s_{n-1}d+ds_n \ \forall n>1$. Fix $h\in G$ and let $s_n:(g_0,\ldots,g_n)\mapsto (h,g_0,\ldots,g_n)$.
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}
+\item When we defined chain homotopies for complex of $R$-modules (\ref{remark:chainhomotopy}), we said that $s_n$'s are $R$-module homomorphism. Here we have a complex of $\Z[G]$-modules, but the $s_n$'s are only $\Z$-module homomorphisms. But this is okay because for any ring $R$, the forgetful functor $R\text{-Mod}\rightarrow\AbGrp$ is exact and faithful.
+\item If $G$ is a finite group, define $S_n:(g_0,\ldots,g_n)\mapsto \sum_{h\in G}(h,g_0,\ldots,g_n)$ which \textit{is} a $\Z[G]$-module map and we have $S_{n-1}d+dS_n=\sum_{h\in G}\id=$ multiplication by $m$ where $m=|G|$, i.e. multiplication by $m$ is chain homotopy to the zero map, i.e. $\times m$ kills $H^n(G,\Z)$ for all $n\geq 1$. 
+\end{enumerate}
+\end{remark}
+
+We now want to calculate $H^1(G,M)$ and $H^2(G,M)$ for a general $G$ (we've seen that $H^0(G,M)=M^G$ and $H^i(G,M)$ for cyclic $G$ in \ref{example:grpcohomo}). Let $R$ be a ring and $A$ an abelian group. Consider $R$ as a left $R$-module. For any left $R$-module $M$, we have $\Hom_R(R\otimes_\Z A,M)=\Hom_\Z(A,M)$. Indeed, an $R$-module map $R\otimes_\Z A\rightarrow M$ is uniquely determined by its values on $1\otimes a$ for $a\in A$. Conversely, if $f:A\rightarrow M$ is a group homomorphism, then we get an $R$-module map $R\otimes_\Z A\rightarrow M:r\otimes a\mapsto rf(a)$. So in particular,
+\[
+\Hom_{\Z[G]}(P_n,M)=\Hom_{\Z[G]}(\Z[G]\otimes_Z Q_n,M)=\Hom_\Z(Q_n,M).
+\]
+Now $P_\bullet$ with $\Z[G]\xrightarrow{\sigma}\Z$ is a projective resolution of $\Z$, so $H^n(G,M)$ is computed by cohomology of
+\[
+0\rightarrow\Hom_{\Z[G]}(P_0,M)\rightarrow\Hom_{\Z[G]}(P_1,M)\rightarrow\Hom_{\Z[G]}(P_2,M)\rightarrow\cdots,
+\]
+which is the same as
+\[
+0\rightarrow\Hom_\Z(Q_0,M)\rightarrow\Hom_\Z(Q_1,M)\rightarrow\Hom_\Z(Q_2,M)\rightarrow\cdots
+\]
+by calculation above. Now $Q_0=\Z$ so $\Hom_\Z(Q_0,M)=\Hom_\Z(\Z,M)=M$.
+
+\begin{flushright}
+\textit{Week 9, lecture 2, 5th March}
+\end{flushright}
+
+A homomorphism $Q_n\rightarrow M$ is uniquely determined by its values on the generators $(e,g_1,\cdots,g_1\cdots g_n)$ for $g_i\in G$, i.e.
+\[
+\Hom_\Z(Q_n,M)=\left\{f:G^n\rightarrow M\right\}:=\Fun(G^n,M)
+\]
+via
+\[
+((e,g_1,\ldots,g_1\cdots g_n) \mapsto f(g_1,\ldots,g_n)) \quad \mappedfrom \quad f,
+\]
+so $H^n(G,M)$ is the cohomology of
+\[
+0\rightarrow M\xrightarrow{d}\Fun(G,M)\xrightarrow{d}\cdots\xrightarrow{d}\Fun(G^n,M)\rightarrow\cdots
+\]
+Now it remains understand the differential $d$.
+\begin{lemma}
+$d:\Fun(G^n,m)\rightarrow \Fun(G^{n+1},M)$ sends $f:G^n\rightarrow M$ to $df:G^{n+1}\rightarrow M$ whose value on $(g_1,\ldots,g_{n+1})$ is as follows:
+\begin{itemize}
+\item $n=0$: $d$ sends an element $m$ of $M=\Fun(G^0,M)$ to the map $dm:G\rightarrow M:g\mapsto gm-m$.
+\item $n=1$: $df:G^2\rightarrow M:(g_1,g_2)\mapsto g_1f(g_2)-f(g_1g_2)+f(g_1)$.
+\item $n=2$: $df:G^3\rightarrow M:(g_1,g_2,g_3)\mapsto g_1f(g_2,g_3)-f(g_1g_2,g_3)+f(g_1,g_2g_3)-f(g_1,g_2)$,
+\item In general:
+\[
+\begin{aligned}
+df:(g_1,\ldots,g_{n+1})&\mapsto g_1f(g_2,\ldots,g_{n+1})-f(g_1g_2,g_3,\ldots,g_{n+1})+f(g_1,g_2g_3,g_4,\ldots,g_{n+1})-\cdots\\
+&\quad \ +(-1)^nf(g_1,g_2,\ldots,g_ng_{n+1})+(-1)^{n+1}f(g_1,\ldots,g_n)
+\end{aligned}
+\]
+\end{itemize}
+\end{lemma}
+
+\begin{thm}
+\begin{enumerate}
+\item $H^0(G,M)=\ker(m\mapsto (g\mapsto gm-m))=\{m\in M:gm=m \ \forall g\in G\}=M^G$ as seen.
+\item
+\[
+H^1(G,M)=\frac{\{f:G\rightarrow M:g_1f(g_2)-f(g_1g_2)+f(g_1)=0 \ \forall g_1,g_2\in G\}}{\{gm-m:m\in M,g\in G\}}=\frac{\text{1-cocycles}}{\text{trivial 1-cocycles}}
+\]
+\item \[
+\begin{aligned}
+H^2(G,M)&=\frac{\{f:G^2\rightarrow M:g_1f(g_2,g_3)-f(g_1g_2,g_3)+f(g_1,g_2g_3)-f(g_1,g_2)=0 \ \forall g_1,g_2,g_3\in G\}}{\{g_1f(g_2)-f(g_1g_2)+f(g_1): f:G\rightarrow M,g_1,g_2\in G\}}\\&=\frac{\text{2-cocycles}}{\text{trivial 2-cocycles}}
+\end{aligned}
+\]
+\end{enumerate}
+\end{thm}
+
+\begin{remark}
+\begin{itemize}
+\item Note that $f:G\rightarrow M$ is a 1-cocycle if $f(g_1g_2)=f(g_1)+\underline{g_1}f(g_2) \ \forall g_1,g_2\in G$. If we covered the underlined $g_1$ then this looks like definition of homomorphism. So such $f$ is also called \textit{crossed homomorphism} in other places.
+\item 2-cocycles are sometimes called \textit{factor sets} (?!).
+\item If $M$ is a trivial $\Z[G]$-module then 1-cycles are indeed precisely group homomorphisms, and hence $H^1(G,M)=\frac{\Hom_\Grp(G,M)}{0}=\Hom_\Grp(G,M)$. For example, if $G$ is finite then $H^1(G,\Z)=0$.
+\end{itemize}
+\end{remark}
+
+\subsection{Inflation-restriction sequence}
+Given a group homomorphism $f:H\rightarrow G$, a $\Z[G]$-module $M$ is a $\Z[H]$-module via $f$. Functoriality gives a group homomorphism $\Res=\Res^G_H:H^n(G,M)\rightarrow H^n(H,M)$.
+
+For example, if $H\leq G$, then $\Z[G]$ is a free $\Z[H]$-module (verify), so a free $\Z[G]$-module gives a free $\Z[H]$-module, hence $P_\bullet$ (the standard resolution) is also a free resolution on $\Z$ as $\Z[H]$-modules. So $H^n(H,M)$ is computed using $\Hom_{\Z[H]}(P_\bullet,M)$. In this case, the restriction map $\Res^G_H$ is the map induced by $\Hom_{\Z[G]}(P_\bullet,M)\rightarrow\Hom_{\Z[H]}(P_\bullet,M)$. If further $H\unlhd G$, then if $M$ is a $\Z[G]$-module, then $M^H$ is a $\Z[G/H]$-module (verify).
+
+\begin{defn}
+Let $H\unlhd G$, the inflation map is
+\[
+\Inf=\Inf_H^G:H^n(G/H,M^H)\xrightarrow{\text{induced by }G\rightarrow G/H} H^n(G,M^H)\xrightarrow{\text{induced by }M^H\hookrightarrow M} H^n(G,M).
+\]
+\end{defn}
+
+\begin{flushright}
+\textit{Week 9, lecture 3, 6th March}
+\end{flushright}
+
+On $H^1$, inf on 1-cocycles goes as follows. Let $\varphi:G/H\rightarrow M^H$. We get a function $\varphi':G\twoheadrightarrow G/H\xrightarrow{\varphi}M^H\hookrightarrow M$. It satisfies the cocycle condition, so is a 1-cocycle for $G$, and $\inf(\varphi)=\varphi'\in H^1(G,M)$.
+
+\begin{lemma}[Shapiro's]
+Let $H\leq G$ and $M$ be a $\Z[H]$-module. Define
+\[
+\Z[G]\otimes_{\Z[H]}M=\Ind_H^G(M)\qquad\text{and}\qquad\Hom_{\Z[H]}(\Z[G],M)=\CoInd_H^G(M).
+\]
+(Verify that if $[G:H]<\infty$ then $\Ind_H^G(M)=\CoInd_H^G(M)$.)
+
+Then
+\[
+H_\ast\left(G,\Ind_H^G(M)\right)\cong H_\ast(H,M)\qquad\text{and}\qquad H^\ast\left(G,\CoInd_H^G(M)\right)\cong H^\ast (H,M)
+\]
+\end{lemma}
+\begin{proof}
+Let $P_\bullet$ be a projective resolution of $\Z$ by $\Z[G]$-modules. Then
+\[
+\Hom_{\Z[G]}(P_n,\CoInd_H^G(M))=\Hom_{\Z[G]}(P_n,\Hom_{\Z[H]}(\Z[G],M))\cong\Hom_{\Z[H]}(P_n,M).
+\]
+\end{proof}
+
+So (let $M$ be a $\Z[G]$-module) we have a commutative diagram
+\[
+\xymatrix{
+H^n(G,M)\ar[r]^\Res \ar[d] & H^n(H,M) \\ H^n\left(G,\Ind_H^G(M)\right) \ar[ur]_{\text{Shapiro}}
+}
+\]
+
+\begin{thm}[Main theorem of inflation-restriction]
+\label{thm:infres}
+Let $H\unlhd G$, then
+\[
+0\rightarrow H^1(G/H,M^H)\xrightarrow{\Inf}H^1(G,M)\xrightarrow{\Res}H^1(H,M)
+\]
+is an exact sequence.
+\end{thm}
+
+\begin{example}
+\label{example:infresondihedral}
+Let $D_{2n}$ be the dihedral group of size $2n$. The cyclic group $C_n$ (rotations) is a normal subgroup, with quotient $C_2$ (reflection). Consider the exact sequence
+\[
+0\rightarrow C_n\rightarrow D_{2n}\rightarrow C_2\rightarrow 0.
+\]
+Let $M$ be a trivial $\Z[D_{2n}]$-module. Then the inflation-restriction sequence gives
+\[
+0\rightarrow H^1(C_2,M)\xrightarrow{\Inf}H^1(D_{2n},M)\xrightarrow{\Res}H^1(C_n,M)
+\]
+and as calculated in $\ref{example:grpcohomo}$, we have $H^1(C_2,M)=M^{C_2}=\{m\in M:gm=m\ \forall g\in C_2\}=M[2]$ and similarly $H^1(C_n,M)=M[n]$. Then for example if $M$ is torsion-free, e.g. $\Z$, then these are 0 and so $H^1(D_{2n},M)=0$.
+\end{example}
+
+\begin{proof}[Proof of \ref{thm:infres}]
+We first prove $\Inf$ is injective. Let $c:G/H\rightarrow M^H$ be a 1-cocycle such that $c:G\rightarrow M$ is a trivial 1-cocycle. (...exercise)
+
+Now we show $\im\Inf=\ker\Res$. Let $c:G\rightarrow M$ be a 1-cocycle such that $\exists m\in M:c(h)=hm-m \ \forall h\in H$. Then $c':G\rightarrow M:g\mapsto c(g)-(gm-m)$ is a 1-cocycle which differs from $c$ by a trivial 1-cocycle, i.e. its class in $H^1(G,M)$ is the same as $c$. Now $c'(h)=c(h)-(hm-m)=0 \ \forall h\in H$, so $c'(gh)=gc'(h)+c'(g)=c'(g) \forall g,h\in H$, i.e. $c'$ is a well-define function $G/H\rightarrow M$. But $gH=Hg$ since $H$ is normal, so $\forall h\in H,g\in G,\ c'(g)=c'(hg)=hc'(g)+c'(h)=hc'(g)$, i.e. $c':G/H\rightarrow M^H$, so $c'\in H^1(G/H,M^H)$.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 10, lecture 1, 12th March}
+\end{flushright}
+
+\subsection{Application to group theory}
+Let $G,H$ be groups. \textbf{The question}: can one classify all groups $E$ such that $H$ is a normal subgroup of $E$ and $E/H=G$? That is, can we classify all short exact sequences of the form $0\rightarrow H\rightarrow E\rightarrow G\rightarrow 1$? So far we've only done ses's of abelian categories, but $\Grp$ isn't one.
+
+\begin{defn}
+An ses of the above form is called a \textit{(group) extension} of $G$ by $H$. We say two extensions of $G$ by $H$ are \textit{equivalent} if $\exists$ a group homomorphism $\varphi:E\rightarrow E'$ such that the diagram
+\[
+\xymatrix{
+0\ar[r] & H\ar[r]\ar@{=}[d] & E\ar[r]\ar[d]^\varphi & G\ar[r]\ar@{=}[d] & 1 \\
+0\ar[r] & H\ar[r] & E'\ar[r] & G\ar[r] & 1 \\
+}
+\]
+commutes. (Verify that this condition actually forces $\varphi$ into an isomorphism).
+\end{defn}
+In such a situation, $E$ acts on $H$ by conjugation. If $H$ is abelian, this action is trivial, so get a well-defined action of $E/H\cong G$ on $H$. Indeed, define this action via $(g,h)\mapsto \widehat gh\widehat g^{-1}$ where $\widehat g\in E$ is such that $\widehat g\equiv g\Mod h$. Then $H$ is a $\Z[G]$-module. Verify that equivalent extensions induce the same $\Z[G]$-structure on $H$.
+
+We now focus on \textbf{the sub-question} where $H$ is abelian: let $G$ be a group and $A$ a $\Z[G]$-module. Can we classify all groups $E$ containing $A$ as a normal subgroup such that the $\Z[G]$-module structure on $A$ is the same as the $G$-action induced by conjugation by $E$? i.e. Can we classify all extensions of the form $0\rightarrow A\rightarrow E\rightarrow G\rightarrow 1$ up to equivalence?
+
+It's a priori an unsatisfying focus from general subgroups to abelian ones. But we will see that an answer to this sub-question is quite often enough to bootstrap up to one to the question we started with.
+
+In analogy to the case of $R$-modules, we can imagine that there is a distinguished class of ``trivial'' extensions which we might call ``split''. (!) It is not enough to just consider $A\times G$ as the split ones. Indeed, the elements of $A$ and $G$ commute in $A\times G$, so the $\Z[G]$-module structure on $A$ given by conjugation is trivial. This is where semidirect products arise (from a stronger motivation then in the usual introduction to group theory).
+
+\begin{defn}
+Let $G$ be a group and $A$ a $\Z[G]$-module. The \textit{semidirect product} $A\rtimes G$ is defined as the set $A\times G$ with binary operation $(a,g)\cdot (b,h)=(a+gb,gh)$. In particular, if $A$ is a trivial $\Z[G]$-module, then $A\rtimes G=A\times G$.
+\end{defn}
+\begin{exe}
+Verify that: this satisfies the group axioms with the unit $(0,e)$ and inverse of $(a,g)$ being $\left(-g^{-1}a,g^{-1}\right)$; and $A\cong A\times\{e\}\subset A\rtimes G$ is a normal subgroup and the action of $G$ on $A$ by conjugations in $A\times G$ coincides with the $G$-action on $A$ that we were given.
+\end{exe}
+
+\begin{defn}
+An extension $0\rightarrow A\xrightarrow{\alpha}E\xrightarrow{\beta} G\rightarrow 1$ is \textit{split} if $\beta$ has a section, i.e. a group homomorphism $\sigma:G\rightarrow E:\beta\circ\sigma=\id_G$.
+\end{defn}
+
+\begin{prop}
+An extension $0\rightarrow A\xrightarrow{\alpha}E\xrightarrow{\beta} G\rightarrow 1$ is split $\iff$ it is equivalent to $0\rightarrow A\hookrightarrow A\rtimes G\rightarrow G\rightarrow 1$ for some $\Z[G]$-module structure on $A$.
+\end{prop}
+\begin{proof}
+\begin{itemize}
+\item $\impliedby$: Let $\sigma:g\mapsto (0,g)$.
+\item $\implies$: Let
+\[
+\xymatrix{
+0\ar[r] & A\ar[r]^\alpha & E\ar[r]^\beta & G\ar@/^/[l]^\sigma\ar[r] & 1
+}
+\]
+be a split extension. Then $E$ contains $A\cong\alpha(A)$ and $\delta(G)$ as subgroups. Any $x\in E$ can be written uniquely as $(\alpha(y),\beta(x))$ where $y\in A$ is the unique element such that $x\sigma(\beta(x))^{-1}=\alpha(y)$. The map $E\rightarrow A\times G:x\mapsto (y,\beta(x))$ is then a bijection. Verify that this bijection sends group law on $E$ to group law on $A\rtimes G$.
+\end{itemize}
+\end{proof}
+
+\begin{flushright}
+\textit{Week 10, lecture 2, 12th March}
+\end{flushright}
+
+\begin{example}
+\begin{enumerate}
+\item Let $k$ be a field. Then we have $0\rightarrow\SL_n(k)\rightarrow\GL_n(k)\xrightarrow{\det}k^\ast\rightarrow 1$, which is split by $\sigma:k^\ast\rightarrow\GL_n(k):a\mapsto\begin{pmatrix}a & 0 \\ 0 & I_{n-1}\end{pmatrix}$. In other words, $\GL_n(k)=\SL_n(k)\rtimes k^\times$.
+\item Let $A=\Z/n\Z$ and $G=C_2$. If the generator of $C_2$ acts on $A$ as $-1$, then $A\rtimes G=D_{2n}$.
+\item Let $Q_8$ be the group of invertible elements of the ring of integers of quaternions $R=\Z\oplus\Z i\oplus \Z j\oplus\Z ij$ where $i^2=j^2=-1$ and $ij=-ji$. We have $Q_8=\{\pm 1,\pm i,\pm j,\pm ij\}$. The subgroup $\{\pm 1,\pm i\}\cong\Z/4\Z$ is normal, so we have $0\rightarrow\Z/4\Z\xrightarrow{\alpha}Q_8\xrightarrow{\beta}C_2\rightarrow 1$. It's not a split extension (the only element of order 2 in $\Q_8$ is $-1\in\Z/4\Z$, so $\beta$ cannot have an section).
+\end{enumerate}
+\end{example}
+
+\begin{thm}
+Let $G$ be a group and $A$ a $\Z[G]$-module. The set of equivalence classes of extensions of the form $0\rightarrow A\xrightarrow{\alpha} E\xrightarrow{\beta} G\rightarrow 1$ such that the induced action of $G$ on $A$ is the same as that the given $\Z[G]$-module structure is in bijection with $H^2(G,A)$. The class of split extensions corresponds to $0\in H^2(G,A)$ under this bijection.
+\end{thm}
+\begin{proof}
+Let's first map an extension to a 2-cocycle. $\beta(E)=G$, so there is a set-theoretic map $s:G\rightarrow E$ such that $\beta\circ s=\id_G$. For any $g,h\in G$, we have $s(g)s(h)s(gh)^{-1}\in\ker\beta=\im\alpha$. Let $\phi(g,h)\in A$ be the unique (since $\alpha$ is injective) element such that $\alpha(\phi(g,h))=s(g)s(h)s(gh)^{-1}$. Notice that $\phi(g,e)=\phi(e,g)=0 \ \forall g\in G$. We claim that $\phi:G^2\rightarrow A$ is a 2-cocycle, i.e. $\forall f,g,h\in G$, we have $f\phi(g,h)+\phi(f,gh)=\phi(h,g)=\phi(fg,h)$ (verifying this is left as an exercise). Also, we claim that two extensions with the same 2-cocycle are equivalent. Indeed, we have a bijection $E\rightarrow A\times G:x\mapsto (y,\beta(x))$ where $y$ is the unique element such that $\alpha(y)=x(s(\beta(x)))^{-1}$. Under this bijection, the group law on $E$ gives the group law on $A\times G$ given by
+\[
+\tag{\ast}
+(a,g)\cdot(b,h)=(a+gb+\phi(g,h),gh),
+\]
+which is evidently determined by $\phi$. Conversely, if we have a 2-cocycle $\phi:G^2\rightarrow A$, then $(\ast)$ defines a group structure $E$ on $A\times G$. It remains to check that if $\phi,\psi:G^2\rightarrow A$ are two 2-cocyles then $E=E_\phi$ and $E'=E_\psi$ are equivalent if $\phi-\psi$ is a trivial 2-cocycle, i.e.
+\[
+\tag{\ast\ast}
+\phi(g,h)-\psi(g,h)=g(c(h))-c(gh)+c(g)
+\]
+for some function $c:G\rightarrow A$. Indeed, an equivalence of $E$ and $E'$ is precisely an isomorphism $\mu:E\xrightarrow{\sim}E'$ such that $\beta=\beta'\mu$. So $\mu s$ is a (set-theoretic) section of $\beta'$. Any two set-theoretic sections of $\beta'$ differ by a map $c:G\rightarrow A$, so the isomorphism $\mu:E\xrightarrow{\sim}E'$ maps $(a,g)\mapsto (a+c(g),g)$, transforming $(\ast)$ for $\phi$ into $(\ast)$ for $\psi$. We have
+\[
+a+g(b)+\phi(g,h)+c(gh)=a+c(g)+g(b)+g(c(h))+\psi(g,h)
+\]
+which shows that a set-theoretic $\mu$ is a group homomorphism (hence a group isomorphism) precisely when $(\ast\ast)$ holds.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 10, lecture 3, 13th March}
+\end{flushright}
+
+\begin{thm}[Schur--Zassenhaus]
+\label{thm:SchurZassenhaus}
+Let $E$ be a finite group of order $mn$ where $(m,n)=1$. If $H$ is a normal subgroup of $E$ of order $n$, then $E\cong H\rtimes E/H$.
+\end{thm}
+\begin{remark}
+\begin{enumerate}
+\item The theorem doesn't really determine $E$ uniquely. e.g. if $H=C_3$ and $E/H=C_2$, then $E\cong C_3\rtimes C_2$ but there are two such groups, $C_6$ and $D_6\cong S_3$, depending on which $C_2$ action on $C_3$ one chooses.
+\item The theorem says if an extension $0\rightarrow H\rightarrow E\rightarrow G\rightarrow 1$ of a group $G$ of order $m$ by a group $H$ of order $n$ with $(m,n)=1$, then it's split.
+\item The coprime condition is necessary. Indeed, $0\rightarrow C_2\rightarrow C_4\rightarrow C_2\rightarrow 0$ is not split.
+\end{enumerate}
+\end{remark}
+\begin{lemma}[Frattini's argument]
+Let $G$ be a finite group with $H$ a normal subgroup. If $S$ is a $p$-Sylow subgroup of $H$, then $G=N_G(S)H$.
+\end{lemma}
+\begin{proof}
+Let $g\in G$. We want to write $g$ as $g=nh$ where $n\in N_G(S)$ and $h\in H$. Consider $g^{-1}Sg$ which, since $H$ is normal, is a subgroup of $H$, and $|g^{-1}Sg|=|S|$, so also a $p$-Sylow subgroup of $H$. Recall that all $p$-Sylow subgroups of $H$ are conjugate to one another, i.e. $\exists h\in H:g^{-1}Sg=h^{-1}Sh$, so $S=gh^{-1}Shg^{-1}$, i.e. $gh^{-1}\in N_G(S)$.
+\end{proof}
+\begin{proof}[Proof of \ref{thm:SchurZassenhaus}]
+Let $G=E/H$. It suffices to show that $E$ contains a subgroup of order $m$. Indeed, that subgroup will be isomorphic to $G$ under $E\twoheadrightarrow G$. (If $G'$ is a subgroup of $E$ of order $m$, then $G'\cap H$ is trivial by Lagrange and $(n,m)=1$.) We prove this statement by induction on $n$. If $n=1$ then clearly $E$ itself is a subgroup of order $m=mn$, so suppose $|H|=n>1$ and the statement is true for all normal subgroups of order $<n$. The proof is in 4 steps.
+\begin{enumerate}
+\item WLOG, $H$ is a minimal normal subgroup. Indeed, suppose $H$ is not a minimal normal subgroup, i.e. $\exists$ another normal subgroup $1\neq H_0\unlhd E$ with $H_0\lneqq H$. Consider $H/H_0\unlhd E/H_0$. Then $|H/H_0|\mid |H|=n$, so $|H/H_0|$ and $|E/H|=m$ are coprime, so by inductive hypothesis $\exists$ a subgroup $\overline H\leq E/H_0:|\overline H|=m$. Let $\widehat H\leq E$ with $\widehat H/H_0=\overline H$, then $|\widehat H/H_0|=|\overline H|=m$, and $|H_0|\mid |H|=n$, so $|H_0|$ and $|\widehat H/H_0|$ are coprime, so again by inductive hypothesis $\exists H'\leq \widehat H$ such that $|H'|=|\widehat H/H_0|=m$.
+\item WLOG, $H$ is a $p$-group. Indeed, suppose $H$ is not a $p$-group; let $S$ be a $p$-Sylow subgroup of $H$. By Frattini's argument, write $E=N_E(S)H$, so $E/H=N_E(S)/(H\cap N_E(S))$. Since $|H\cap N_E(S)|\mid |H|=n$, and $|N_E(S)/(H\cap N_E(S))|=|E/H|=m$, we have $|N_E(S)/(H\cap N_E(S))|$ and $|H\cap N_E(S)|$ are coprime. Since $S\lneqq H$ and $H$ is a minimal normal subgroup of $E$, we must have $S$ is not a normal subgroup of $E$. In particular $S\neq N_E(S)$. We have $|N_E(S)|<|E|$. By the inductive hypothesis, $\exists H'\leq N_E(S):|H'|=|N_E(S)/(H\cap N_E(S))|=|E/H|=m$.
+\item Minimal normal subgroups $H$ which are $p$-groups are abelian. Indeed, recall from group theory: it follows from orbit--stabiliser theorem that since $H$ is a $p$-group, $Z(H)$ is nontrivial. Clearly $Z(H)\unlhd E$. But $H$ is minimal, so we must have $H=Z(H)$, i.e. $H$ is abelian.
+\item We have seen that extensions of the form $0\rightarrow H\rightarrow E\rightarrow G\rightarrow 1$ are classified by $H^2(G,H)$. But we've seen in \ref{example:grpcohomo} that this is 0, so all these extensions are split.
+\end{enumerate}
+\end{proof}
+
+\begin{flushright}
+\textit{Week 11, lecture 1, 19th March}
+\end{flushright}
+
+\subsection{Lyndon--Hochschild--Serre spectral sequence}
+By \ref{thm:infres}, if we have $H\unlhd G$ and $M$ a $\Z[G]$-module, then we have the exact sequence
+\[
+\xymatrix{
+0\ar[r] & H^1(G/H,M^H)\ar[r]^\Inf & H^1(G,M)\ar[r]^\Res &  H^1(G/H,M)^{G/H}\ar[r] & H^2(G/H,M^H)\ar[r]^\Inf & H^2 (G,M).
+}
+\]
+But it doesn't go on. What about higher degrees?
+
+\begin{defn}
+A \textit{double (cochain) complex} $\left(A^{\bullet,\bullet},d',d''\right)$ is a commutative diagram
+\[
+\xymatrix{
+& \vdots & \vdots & \vdots \\
+\cdots\ar[r]^{d'} & A^{i-1,j+1} \ar[r]^{d'}\ar[u]_{d''} & A^{i,j+1}\ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j+1} \ar[r]^{d'}\ar[u]_{d''} & \cdots \\
+\cdots\ar[r]^{d'} & A^{i-1,j}\ar[r]^{d'}\ar[u]_{d''} & A^{i,j} \ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j}\ar[r]^{d'}\ar[u]_{d''} & \cdots \\
+\cdots\ar[r]^{d'} & A^{i-1,j-1}\ar[r]^{d'}\ar[u]_{d''} & A^{i,j+1}\ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j+1}\ar[r]^{d'}\ar[u]_{d''} & \cdots \\
+& \vdots \ar[u]_{d''}& \vdots \ar[u]_{d''} & \vdots \ar[u]_{d''}
+}
+\]
+where each row and column is a complex.
+\end{defn}
+
+\begin{defn}
+Let $\left(A^{\bullet,\bullet},d',d''\right)$ be a double complex. The \textit{total complex} is the complex $\Tot A^{\bullet,\bullet}=A^\bullet$ given by
+\[
+A^n=\bigoplus_{i+j=n}A^{i,j}
+\]
+with $d:A^n\rightarrow A^{n+1}$ given by
+\[
+d=\sum_{i+j=n}d'^{i,j}+(-1)^nd''^{i,j}.
+\]
+\end{defn}
+
+\begin{example}
+\label{example:running}
+Let $G$ be a group, $H\unlhd G$, $P^\bullet$ a projective resolution of the trivial $\Z[G]$-module $\Z$. We've seen that then $P^\bullet$ is also a projective resolution of $\Z$ by $\Z[H]$-modules. Let $Q^\bullet$ be a projective resolution of $\Z$ by $\Z[G/H]$-modules. Let $M$ be a $\Z[G]$-module. Then $G$ acts on $\Hom_{\Z[H]}(P^\bullet,M)$ by $gf(x)=g(f(g^{-1}x))$. Since $H$ acts trivially, we consider $\Hom_{\Z[H]}(P^\bullet,M)$ as an $\Z[G/H]$-module. We get a double complex
+\[
+A^{\bullet,\bullet}=\Hom_{\Z[G/H]}\left(Q^\bullet,\Hom_{\Z[H]}(P^\bullet,M)\right)\text{ with }d'=\Hom_{\Z[G/H]}(d_Q,\id),\ d''=\Hom_{\Z[G/H]}(\id,d_P^\ast).
+\]
+
+Note that $A^{i,j}=0$ whenever $i$ or $j$ is negative (in this case we say it's ``first quadrant''). In particular, $\Tot A^{\bullet,\bullet}$ is concentrated in nonnegative degrees.
+\end{example}
+
+Given a double complex $A^{\bullet,\bullet}$, we get a sequence of double complexes $F^iA^{\bullet,\bullet}$ given by setting all columns to the left of the $i$th column in $A^{\bullet,\bullet}$ to be 0. Taking total complexes gives a sequence of (sub)complexes $F^iA^\bullet:=\Tot F^iA^{\bullet,\bullet}$, i.e.
+\[
+F^iA^n=\bigoplus_{\substack{i'+j=n\\ i'\geq i}}A^{i',j}.
+\]
+This sequence is sometimes called a \textit{filtration}. e.g. $F^0A^\bullet=A^\bullet,\ F^iA^\bullet=0$ whenever $i>n$.
+
+\begin{prop}
+Let $A^{\bullet,\bullet}$ be a first quadrant double complex. Then $\exists$ objects $E^{i,j}_r$ for $i,j,r\geq 0$ such that the following holds:
+\begin{enumerate}
+\item We have $E^{i,j}_0=A^{i,j} \ \forall i,j$.
+\item For each $r$, $\exists$ maps $d_r^{i,j}:E_r^{i,j}\rightarrow E_r^{i+r,j+1-r}$ such that 
+\[
+\xymatrix@C=3.5pc{
+\cdots\ar[r] & E_r^{i-r,j-1+r}\ar[r]^{d_r^{i-r,j-1+r}} & E_r^{i,j}\ar[r]^{d_r^{i,j}} & E_r^{i+r,j+1-r}\ar[r]^{d_r^{i+r,j+1-r}}\ar[r] & E_r^{i+2r,j+2-2r}\ar[r] & \cdots
+}
+\]
+is a complex.
+\item Each $E_{r+1}^{i,j}$ is $H^i$ of the above complex.
+\item For $r=0$, $d_0^{i,j}=(-1)^id''^{i,j}$.
+\item For $r=1$, $d_1^{i,j}$ is the map induced by $d'^{i,j}$.
+\item The terms $E_r^{i,j}$ stabilise for $r\gg 0$. We call the stabilisation $E_\infty^{i,j}$.
+\item There is a filtration of $H^n(\Tot A^{\bullet,\bullet})$ whose successive quotients are the $E_\infty^{i,j}$ for $i+j=n$. We say that spectral sequence \textit{converges} to $H^\ast(\Tot A^{\bullet,\bullet})$.
+\end{enumerate}
+The objects $E_r^{i,j}$ for a fixed $r$ forms what's called the $E_r$-\textit{page}.
+\end{prop}
+\begin{proof}
+For the full proof, see \href{https://stacks.math.columbia.edu/tag/012K}{Stacks project, 012K}. The gist is: let $A^\bullet=\Tot A^{\bullet,\bullet}$ with filtration $F^iA^\bullet$ as above. Define
+\[
+Z_r^{i,j}=\frac{F^iA^{i+j}\cap d^{-1}\left(F^{i+r}A^{i+j+1}\right)+F^{i+1,i+j}}{F^{i+1}A^{i+j}}
+\]
+and
+\[
+B_r^{i,j}=\frac{F^iA^{i+j}\cap d\left(F^{i-r+1}A^{i+j-1}\right)+F^{i+1,i+j}}{F^{i+1}A^{i+j}}.
+\]
+Then $E_r^{i,j}=Z_r^{i,j}/B_r^{i,j}$ and $d_r^{i,j}$ is $z+F^{i+1}A^{i+j}\mapsto dz+F^{i+r+1}A^{i+j+1}$.
+\end{proof}
+
+\begin{flushright}
+\textit{Week 11, lecture 2, 19th March}
+\end{flushright}
+
+The $E_\infty^{i,j}$ along the $i+j=n$ line are successive quotients of a filtration on $H^n(A^\bullet)$. Knowing the $E_\infty^{i,j}$ gives us information about $H^n(A^\bullet)$. Sometimes we can completely determine $H^n(A^\bullet)$ this way.
+
+\begin{example}[\ref{example:running} continued]
+The spectral sequence $E_r^{i,j}$ we get from $A^{\bullet,\bullet}$ is called the \textit{Lyndon--Hochschild--Serre spectral sequence}. It converges to $H^\ast(G,M)$. The $E_1$-page looks like $\Hom_{\Z[G/H]}\left(Q^\bullet,H^\ast(H,M)\right)$. The $E_2$-page is $H^i\left(G/H,H^j\left(H,M\right)\right)$. One often writes the shorthand notation $H^{i+j}(G,M)$.
+\end{example}
+
+Suppose we have a first quadrant spectral sequence and we know the $E_2$-page. We get the $E_3$-page by taking cohomology of the complexes on the $E_2$-page:
+\[
+\xymatrix{
+\ker\left(E_2^{0,2}\rightarrow E_2^{2,1}\right)\ar[ddrrr] & \ker\left(E_2^{1,2}\rightarrow E_2^{3,1}\right) & \cdots \\
+\color{red}\ker\left(E_2^{0,1}\rightarrow E_2^{2,0}\right) & \color{red}\ker\left(E_2^{1,1}\rightarrow E_2^{3,0}\right) & \color{red}\cdots  \\
+\color{red}E_2^{0,0} & \color{red}E_2^{1,0} & \color{red}E_2^{2,0}/d_2^{0,1}\left(E_2^{0,1}\right) & \color{red}\cdots
+}
+\]
+where the two red rows have no space for a nonzero arrow to come out, i.e. they are already stabilised, $E_3^{i,j}=E_\infty^{i,j}$ for the red. But by property 7, $E_\infty^{i,j}$ for $i+j=n$ are successive quotients of a filtration on $H^n(\Tot A^{\bullet,\bullet})$. In particular, fix $i+j=1$, we immediately get an ses,
+\[
+\xymatrix{
+0\ar[r] & E_2^{1,0}\ar[r] & H^1(\Tot A^{\bullet,\bullet})\ar[r] & \ker\left(E_2^{0,1}\rightarrow E_2^{2,0}\right)\ar[r] & 0
+}
+\]
+and for $i+j=2$ we have an injection
+\[
+\xymatrix{
+E_2^{2,0}/d_2^{0,1}\left(E_2^{0,1}\right)\ar@{^{(}->}[r] & H^2(\Tot A^{\bullet,\bullet})
+}
+\]
+Sticking them together we get the ``5-term low-degree exact sequence''
+\[
+\xymatrix{
+0\ar[r] & E_2^{1,0}\ar[r] & H^1(\Tot A^{\bullet,\bullet})\ar[r] & E_2^{0,1}\ar[r] & E_2^{2,0}\ar[r] & H^2(\Tot A^{\bullet,\bullet}).
+}
+\]
+
+\begin{example}[\ref{example:running} continued]
+The calculation before and the above deduction gives us
+\[
+\xymatrix{
+0\ar[r] & H^1\left(G/H,M^H\right)\ar[r] & H^1(G,H)\ar[r] & H^1(H,M)^{G/H} \ar[r] & H^2(G/H,M^H)\ar[r] & H^2(G,M)
+}
+\]
+which looks precisely like the sequence we started this subsection with! It remains as an exercise to see that the maps are indeed inflation and restriction.
+\end{example}
+
+\begin{exe}
+Let $H\unlhd G$ and $M$ a $\Z[G]$-module. Suppose $H^i(H,M)=0 \ \forall i=1,\ldots,n$ for some $n\geq 1$. Show that $H^i(G,M)\cong H^i\left(G/H,M^H\right) \ \forall i=1,\ldots,n-1$, and that there is an exact sequence
+\[
+\xymatrix{
+0\ar[r] & H^n\left(G/H,M^H\right)\ar[r]^\Inf & H^n(G,M)\ar[r]^\Res & H^n(G/H,M)^{G/H}\ar[r] & H^{n+1}\left(G/H,M^H\right)\ar[r]^\Inf & H^{n+1}(G,M).
+}
+\]
+\end{exe}
+
+\begin{example}
+Let $m$ be an odd integer. Let's use the Lyndon--Hochschild--Serre spectral sequence to compute $H^\ast(D_{2m},\Z)$ where $\Z$ is the trivial $\Z[D_{2m}]$-module. We already saw in \ref{example:infresondihedral} with the inflation-restriction sequence that $H^1(D_{2m},\Z)=0$. We know $D_{2m}$ is an extension of the form $0\rightarrow C_m\rightarrow D_{2m}\rightarrow C_2\rightarrow 0$. So the $E_2$-page of the Lyndon--Hochschild--Serre spectral sequence is $E_2^{i,j}=H^i\left(C_2,H^j(C_m,\Z)\right)$, where by calculation in \ref{example:grpcohomo},
+\[
+H^j(C_m,\Z)\cong\left\{
+\begin{aligned}
+&\Z \quad&\text{if }j=0\\
+&0 \quad&\text{if }j\text{ is odd}\\
+&\Z/m\Z \quad&\text{if }j>0\text{ is even}.
+\end{aligned}
+\right.
+\]
+Since we assumed $m$ is odd, $|C_2|$ is coprime to $m$, so $E_2^{i,j}=H^i\left(C_2,H^j(C_m,\Z)\right)=0 \ \forall i,j$ except possibly $i=0$ or $j=0$. To find $E_2^{i,j}$ for $i=0$ or $j=0$ we need to understand how $C_2$ acts on $H^j(C_m,\Z)$. The $C_2$-action on $C_m$ is induced by conjugations in $D_{2m}$. We saw that this action is the nontrivial one (the generator acts as $-1$; otherwise we would have $C_{2m}=C_2\times C_m$ instead of $D_{2m}$). Look at Example 6.7.10 on page 191 in Weibel's book to see that $C_2$ acts as $(-1)^j$ on $H^{2j}(C_m,\Z)$. So we find that
+\[
+E_2^{0,j}=H^0\left(C_2,H^j(C_m,\Z)\right)=\left\{
+\begin{aligned}
+&\Z \quad&\text{if }j=0\\
+&0 \quad&\text{if }j\text{ is odd}\\
+&\Z/m\Z \quad&\text{if }j>0\text{ and }j\equiv 0\Mod 4\\
+&0\quad&\text{if }j>0\text{ and }j\equiv 2\Mod 4
+\end{aligned}
+\right.
+\]
+and
+\[
+E_2^{i,0}=H^i(C_2,\Z)=\left\{
+\begin{aligned}
+&0 \quad&\text{if }i\text{ is odd}\\
+&\Z/2\Z \quad&\text{if }i\text{ is even}\\
+\end{aligned}
+\right.
+\]
+
+We can thus see the $E_2$-page as follows:
+\[
+\xymatrix{
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+\Z/m\Z & 0 & 0 & 0\ar[rrd] & 0 & 0 & \cdots \\
+0 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+0 & 0 & 0\ar[rrd] & 0 & 0 & 0 & \cdots \\
+0\ar[rrd] & 0 & 0 & 0 & 0 & 0 & \cdots \\
+\Z & 0 & \Z/2\Z & 0 & \Z/2\Z & 0 & \cdots
+}
+\]
+In particular, note that the $d_2$-differentials either begin or end on a zero, so they are all the zero map, i.e. their kernels are everything and the $E_3$-page (and the $E_4$-page, and so on) are the same. This means $E_2^{i,j}=E_\infty^{i,j} \ \forall i,j$ already stabilises.
+
+Looking at the $i+j=n$ lines, we immediately read off
+\[
+H^n\left(D_{2m},\Z\right)\cong=\left\{
+\begin{aligned}
+&\Z\quad&\text{if }n=0\\
+&0\quad&\text{if }n\text{ is odd}\\
+&\Z/2\Z\quad&\text{if }n\equiv 2\Mod 4
+\end{aligned}
+\right.
+\]
+since these lines have at most one nontrivial entry. What about $0<i+j=n\equiv 0\Mod 4$? We get an extension
+\[
+\xymatrix{
+0\ar[r] & \Z/2\Z\ar[r] & H^n\left(D_{2n},\Z\right)\ar[r] & \Z/m\Z\ar[r] & 0,
+}
+\]
+where $(2,m)=1$ so this splits, and since $H^n\left(D_{2n},\Z\right)$ is abelian, so in this case
+\[
+H^n\left(D_{2n},\Z\right)\cong\Z/2\Z\times\Z/m\Z\cong\Z/2m\Z.
+\]
+What happens if $m$ is even?
+\end{example}
+
+\end{document}
