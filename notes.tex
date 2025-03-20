@@ -1752,7 +1752,7 @@ H^2(G,M)&=\frac{\{f:G^2\rightarrow M:g_1f(g_2,g_3)-f(g_1g_2,g_3)+f(g_1,g_2g_3)-f
 \begin{itemize}
 \item Note that $f:G\rightarrow M$ is a 1-cocycle if $f(g_1g_2)=f(g_1)+\underline{g_1}f(g_2) \ \forall g_1,g_2\in G$. If we covered the underlined $g_1$ then this looks like definition of homomorphism. So such $f$ is also called \textit{crossed homomorphism} in other places.
 \item 2-cocycles are sometimes called \textit{factor sets} (?!).
-\item If $M$ is a trivial $\Z[G]$-module then 1-cycles are indeed precisely group homomorphisms, and hence $H^1(G,M)=\frac{\Hom_\Grp(G,M)}{0}=\Hom_\Grp(G,M)$. For example, if $G$ is finite then $H^1(G,\Z)=0$.
+\item If $M$ is a trivial $\Z[G]$-module then 1-cocycles are indeed precisely group homomorphisms, and hence $H^1(G,M)=\frac{\Hom_\Grp(G,M)}{0}=\Hom_\Grp(G,M)$. For example, if $G$ is finite then $H^1(G,\Z)=0$.
 \end{itemize}
 \end{remark}
 
@@ -1952,7 +1952,7 @@ Let $G=E/H$. It suffices to show that $E$ contains a subgroup of order $m$. Inde
 By \ref{thm:infres}, if we have $H\unlhd G$ and $M$ a $\Z[G]$-module, then we have the exact sequence
 \[
 \xymatrix{
-0\ar[r] & H^1(G/H,M^H)\ar[r]^\Inf & H^1(G,M)\ar[r]^\Res &  H^1(G/H,M)^{G/H}\ar[r] & H^2(G/H,M^H)\ar[r]^\Inf & H^2 (G,M).
+0\ar[r] & H^1(G/H,M^H)\ar[r]^-\Inf & H^1(G,M)\ar[r]^-\Res &  H^1(G/H,M)^{G/H}\ar[r] & H^2(G/H,M^H)\ar[r]^-\Inf & H^2 (G,M).
 }
 \]
 But it doesn't go on. What about higher degrees?
@@ -2005,7 +2005,7 @@ Let $A^{\bullet,\bullet}$ be a first quadrant double complex. Then $\exists$ obj
 \item For each $r$, $\exists$ maps $d_r^{i,j}:E_r^{i,j}\rightarrow E_r^{i+r,j+1-r}$ such that 
 \[
 \xymatrix@C=3.5pc{
-\cdots\ar[r] & E_r^{i-r,j-1+r}\ar[r]^{d_r^{i-r,j-1+r}} & E_r^{i,j}\ar[r]^{d_r^{i,j}} & E_r^{i+r,j+1-r}\ar[r]^{d_r^{i+r,j+1-r}}\ar[r] & E_r^{i+2r,j+2-2r}\ar[r] & \cdots
+\cdots\ar[r] & E_r^{i-r,j-1+r}\ar[r]^-{d_r^{i-r,j-1+r}} & E_r^{i,j}\ar[r]^-{d_r^{i,j}} & E_r^{i+r,j+1-r}\ar[r]^-{d_r^{i+r,j+1-r}}\ar[r] & E_r^{i+2r,j+2-2r}\ar[r] & \cdots
 }
 \]
 is a complex.
@@ -2080,7 +2080,7 @@ which looks precisely like the sequence we started this subsection with! It rema
 Let $H\unlhd G$ and $M$ a $\Z[G]$-module. Suppose $H^i(H,M)=0 \ \forall i=1,\ldots,n$ for some $n\geq 1$. Show that $H^i(G,M)\cong H^i\left(G/H,M^H\right) \ \forall i=1,\ldots,n-1$, and that there is an exact sequence
 \[
 \xymatrix{
-0\ar[r] & H^n\left(G/H,M^H\right)\ar[r]^\Inf & H^n(G,M)\ar[r]^\Res & H^n(G/H,M)^{G/H}\ar[r] & H^{n+1}\left(G/H,M^H\right)\ar[r]^\Inf & H^{n+1}(G,M).
+0\ar[r] & H^n\left(G/H,M^H\right)\ar[r]^-\Inf & H^n(G,M)\ar[r]^-\Res & H^n(G/H,M)^{G/H}\ar[r] & H^{n+1}\left(G/H,M^H\right)\ar[r]^-\Inf & H^{n+1}(G,M).
 }
 \]
 \end{exe}
