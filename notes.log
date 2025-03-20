@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.5.16)  20 MAR 2025 04:54
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.5.16)  20 MAR 2025 15:18
  system commands enabled.
 **notes.tex
 (./notes.tex
@@ -1860,11 +1860,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 <xymatrix 5x2 740> <xymatrix 5x4 512> [13] <xymatrix 5x2 365> <xymatrix 6x1
 196> <xymatrix 5x6
 
-Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1137].
+Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1141].
 
 1280> <xymatrix 5x2 365> <xymatrix 7x1 234> <xymatrix 5x2 365> <xymatrix 7x1
 234> [14] <xymatrix 5x5 630> <xymatrix 3x4 670> [15] <xymatrix 5x2 344>
-Overfull \hbox (15.61035pt too wide) in paragraph at lines 1272--1273
+Overfull \hbox (15.61035pt too wide) in paragraph at lines 1276--1277
 []\TU/TeXGyrePagellaX(0)/m/n/10 Let $\OML/npxmi/m/it/10 n \LMS/npxsy/m/n/10  \
 OT1/zpltlf/m/n/10 2$ \TU/TeXGyrePagellaX(0)/m/n/10 and $\OML/npxmi/m/it/10 k$ \
 TU/TeXGyrePagellaX(0)/m/n/10 be a field. Con-sider $\OML/npxmi/m/it/10 k$ \TU/T
@@ -1877,7 +1877,7 @@ ellaX(0)/m/n/10 act-ing as 0. Com-pute $[][] []$.
 [16] [17] <xymatrix 5x2 437> <xymatrix 2x2 182> <xymatrix 5x2 430> [18]
 <xymatrix 5x2 430> <xymatrix 2x2 175> <xymatrix 5x2 437> <xymatrix 5x2 423>
 [19] <xymatrix 5x2 423> [20] [21]
-Overfull \hbox (3.4338pt too wide) in paragraph at lines 1652--1653
+Overfull \hbox (3.4338pt too wide) in paragraph at lines 1656--1657
 \TU/TeXGyrePagellaX(0)/m/n/10 Let $\OML/npxmi/m/it/10 P[] \U/npxmia/m/it/10 = \
 U/npxsym/m/n/10 Z\LMS/npxsy/m/n/10 »\OML/npxmi/m/it/10 G[]\LMS/npxsy/m/n/10 
 ¼$ \TU/TeXGyrePagellaX(0)/m/n/10 with ca-non-ical gen-er-at-ors $\LMS/npxsy/m/
@@ -1905,12 +1905,12 @@ Package rerunfilecheck Info: File `notes.out' has not changed.
 
 Here is how much of LuaTeX's memory you used:
  50128 strings out of 476381
- 156418,1977958 words of node,token memory allocated
- 1589 words of node memory still in use:
+ 125129,1977958 words of node,token memory allocated
+ 1595 words of node memory still in use:
    13 hlist, 2 vlist, 3 rule, 1 local_par, 10 glue, 8 kern, 1 penalty, 1 margin_
-kern, 4 glyph, 295 attribute, 61 glue_spec, 150 attribute_list, 2 write, 1 pdf_l
+kern, 4 glyph, 297 attribute, 61 glue_spec, 151 attribute_list, 2 write, 1 pdf_l
 iteral, 1 pdf_save, 1 pdf_restore nodes
-   avail lists: 1:2,2:3610,3:707,4:179,5:1610,6:109,7:10256,8:85,9:3146,10:18,11
+   avail lists: 1:1,2:3649,3:684,4:179,5:1648,6:108,7:10256,8:85,9:2973,10:18,11
 :436,12:1
  70532 multiletter control sequences out of 65536+600000
  185 fonts using 15170887 bytes
@@ -1932,7 +1932,7 @@ ype1/public/xypic/xydash10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/p
 ublic/xypic/xyeuat10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
 xypic/xyeubt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/
 zplr.pfb>
-Output written on notes.pdf (31 pages, 367170 bytes).
+Output written on notes.pdf (31 pages, 367175 bytes).
 
 PDF statistics: 651 PDF objects out of 1000 (max. 8388607)
  591 compressed objects within 6 object streams
