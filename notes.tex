@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[british]{babel}
 \usepackage{amsthm}
@@ -15,10 +16,14 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{pst-plot}
-\usepackage{newpx}
+\usepackage[math]{iwona}
+\usepackage{cmbright}
 \usepackage{ytableau}
 \usepackage{microtype}
 \usepackage{listings}
+\usepackage{stmaryrd}
+
+\renewcommand{\familydefault}{\sfdefault}
 
 \geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
 
@@ -1710,7 +1715,7 @@ A homomorphism $Q_n\rightarrow M$ is uniquely determined by its values on the ge
 \]
 via
 \[
-((e,g_1,\ldots,g_1\cdots g_n) \mapsto f(g_1,\ldots,g_n)) \quad \mappedfrom \quad f,
+((e,g_1,\ldots,g_1\cdots g_n) \mapsto f(g_1,\ldots,g_n)) \quad \mapsfrom \quad f,
 \]
 so $H^n(G,M)$ is the cohomology of
 \[
@@ -2132,7 +2137,7 @@ In particular, note that the $d_2$-differentials either begin or end on a zero, 
 
 Looking at the $i+j=n$ lines, we immediately read off
 \[
-H^n\left(D_{2m},\Z\right)\cong=\left\{
+H^n\left(D_{2m},\Z\right)\cong\left\{
 \begin{aligned}
 &\Z\quad&\text{if }n=0\\
 &0\quad&\text{if }n\text{ is odd}\\
