@@ -18,11 +18,9 @@
 \usepackage{pst-plot}
 \usepackage[math]{iwona}
 \usepackage{cmbright}
-\usepackage{ytableau}
 \usepackage{microtype}
 \usepackage{listings}
 \usepackage{stmaryrd}
-
 \renewcommand{\familydefault}{\sfdefault}
 
 \geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
@@ -63,8 +61,6 @@
 picture,baseline=(#2.base)]{\node(#2)[#1]{$#3$};}}
 
 \newcommand*\pp{{\rlap{\('\)}}}
-
-\ytableausetup{smalltableaux}
 
 \makeatletter
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
@@ -1351,9 +1347,9 @@ Now by \ref{thm:enoughinjectives}, let $I$ be an injective abelian group such th
 \item We already know for any $i\geq 1$, $\Tor_i^\Z(\Z,B)=\Tor_i^\Z(A,\Z)=\Tor_i^\Z(\Q,B)=\Tor_i^\Z(A,\Q)=0$ since $\Z$ is a free $\Z$-module and $\Q$ is flat since it's torsion-free (\ref{thm:flatistorsionfreeoverPID}).
 \item I claim $\Tor_1^\Z(\Q/\Z,A)=A_\tors$. Two ways of seeing this:
 \begin{enumerate}
-\item (Imagine you know colimits) Consider $\Q/\Z$ as the colimit $\displaystyle\lim_{\underset{n}{\rightarrow}}\Z/n\Z$, then
+\item (Imagine you know colimits) Consider $\Q/\Z$ as the colimit $\underset{n}{\varinjlim}\Z/n\Z$, then
 \[
-\Tor_i^\Z(\Q/\Z,A)=\underset{\underset{n}{\rightarrow}}{\lim}\Tor_i^\Z(\Z/n,A)=\underset{\underset{n}{\rightarrow}}{\lim}A[n]=A_\tors.
+\Tor_i^\Z(\Q/\Z,A)=\underset{n}{\varinjlim}\Tor_i^\Z(\Z/n,A)=\underset{n}{\varinjlim}A[n]=A_\tors.
 \]
 \item We first claim that in general $\Tor_1^\Z(A,B)=\Tor_1^\Z(A,B_\tors)$. Indeed, consider the ses $0\rightarrow B_\tors\rightarrow B\rightarrow B/B_\tors \rightarrow 0$ which by \ref{thm:derivfunc} and previous proposition induces the long exact sequence
 \[
@@ -1612,7 +1608,7 @@ H_n(C_m,M)=\left\{
 \[
 \Hom_\Z(\Q/\Z,\Q/\Z)\cong\left\{(a_1,a_2,\ldots)\in\prod_{n=1}^\infty\Z/n\Z:\forall m:m\mid n,\ a_n\equiv a_m\Mod m\right\}.
 \]
-This is a ring under component-wise addition and multiplication. Denote it by $\zhat$. If you know the (now mysterious) mastery material, you can write $\zhat=\underset{\leftarrow}{\lim} \Z/n\Z$ with respect to the map $\Z/n\Z\xrightarrow{\Mod m}\Z/m\Z$ (note that the condition is equivalent to $a_n\mapsto a_m$ under this map).
+This is a ring under component-wise addition and multiplication. Denote it by $\zhat$. If you know the (now mysterious) mastery material, you can write $\zhat=\varprojlim \Z/n\Z$ with respect to the map $\Z/n\Z\xrightarrow{\Mod m}\Z/m\Z$ (note that the condition is equivalent to $a_n\mapsto a_m$ under this map).
 \end{prop}
 \begin{proof}
 Given $a\in\zhat$, define $\phi_a:\Q/\Z\rightarrow\Q/\Z$ by $\frac{m}{n}\mapsto a_n\frac{m}{n}$. We first show $\phi_a$ is indeed a group homomorphism. Indeed,
@@ -1648,7 +1644,7 @@ a_{\phi_a}=\left(a_1\cdot 1,2\left(a_2\frac12\right),3\left(a_3\frac13\right),\l
 \]
 \end{proof}
 
-Again if you know the mastery material, $\Hom_\Z\left(\underset{\rightarrow}{\lim}A_i,B\right)\cong\underset{\leftarrow}{\lim}\Hom_\Z(A_i,B)$. Also, we worked out in coursework 1 that $\Hom_\Z(\Z/n\Z,\Q/\Z)=\Z/n\Z$. Combining these two facts we easily have $\Hom_\Z(\Q/\Z,\Q/\Z)=\Hom_\Z\left(\underset{\rightarrow}{\lim}\Z/n\Z,\Q/\Z\right)=\underset{\leftarrow}{\lim}\Hom_\Z(\Z/n\Z,\Q/\Z)=\underset{\leftarrow}{\lim}\Z/n\Z=\zhat$.
+Again if you know the mastery material, $\Hom_\Z\left(\varinjlim A_i,B\right)\cong\varprojlim \Hom_\Z(A_i,B)$. Also, we worked out in coursework 1 that $\Hom_\Z(\Z/n\Z,\Q/\Z)=\Z/n\Z$. Combining these two facts we easily have $\Hom_\Z(\Q/\Z,\Q/\Z)=\Hom_\Z\left(\varinjlim\Z/n\Z,\Q/\Z\right)=\varprojlim \Hom_\Z(\Z/n\Z,\Q/\Z)=\varprojlim \Z/n\Z=\zhat$.
 
 How is this useful? Consider the ses $0\rightarrow\Z\rightarrow\Q\rightarrow\Q/\Z\rightarrow 0$ which by $\Hom_\Z(-,\Q/\Z)$ induces the long $0\rightarrow\Hom_\Z(\Q/\Z,\Q/\Z)\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Hom_\Z(\Z,\Q/\Z)\rightarrow\Ext_\Z^1(\Q/\Z,\Q/\Z)\rightarrow\cdots$, where we just calculated $\Hom_\Z(\Q/\Z,\Q/\Z)=\zhat$, and by \ref{prop:flatinjprojExtTor0} and \ref{thm:injisdivoverPID} $\Ext_\Z^1(\Q/\Z,\Q/\Z)=0$, and since a $\Z$-homomorphism $\Z\rightarrow\Q/\Z$ is given by its image of 1, $\Hom_\Z(\Z,\Q/\Z)=\Q/\Z$. Hence we have an ses $0\rightarrow\zhat\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Q/\Z\rightarrow 0$. Consider $\Hom_\Z(\Q,\Q/\Z)$ as a $\Q$-vector space. Then one has $\Tor_1^\Z(\Q/\Z,\Q)\rightarrow\zhat\otimes\Q\rightarrow\Hom_\Z(\Q,\Q/\Z)\rightarrow\Q/\Z\otimes\Q$, but $\Tor_1^\Z(\Q/\Z,\Q)=0$ by \ref{prop:flatinjprojExtTor0} and \ref{thm:flatistorsionfreeoverPID}, and any tensor product with a torsion is 0, hence $\Hom_\Z(\Q,\Q/\Z)\cong\zhat\otimes\Q=\A_\Q$ (the ring of adèles of $\Q$).
 
