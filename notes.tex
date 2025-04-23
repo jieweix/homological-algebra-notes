@@ -512,7 +512,7 @@ but $\Z/4\Z\not\cong\Z/2\Z\times\Z/2\Z$.
 \begin{prop}
 For a ses of the form $(\ast)$, the following are equivalent:
 \begin{enumerate}
-\item The sequence is split
+\item The sequence is split.
 \item $\exists$ an $R$-module homomorphism $\sigma:C\rightarrow B:\beta\sigma=\id_C$. In this case we say $\sigma$ is a \textit{splitting} of $\beta$.
 \item $\exists$ an $R$-module homomorphism $\rho:B\rightarrow A:\rho\alpha=\id_A$. In this case we say $\rho$ is a \textit{retraction} of $\alpha$.
 \end{enumerate}
@@ -830,7 +830,7 @@ Let $A$ be an abelian group and $n\in N$. Define $A/n=A\otimes_\Z\Z/n$. Consider
 A left $R$-module $B$ is \textit{flat} if $-\otimes_RB$ preserves short exact sequences of right $R$-modules, i.e. it preserves injections.
 \end{defn}
 \begin{example}
-We just saw that $\Z/n$ is a flat $\Z$-module.
+We just saw that $\Z/n$ is not a flat $\Z$-module.
 \end{example}
 
 \begin{prop}
@@ -852,7 +852,7 @@ $\Z$ and $\Q$ are torsion-free. $\Z/n,\Q/z$ are torsion.
 \end{example}
 
 \begin{lemma}
-Projective modules are torsion-free.
+Projective $R$-modules are torsion-free.
 \end{lemma}
 \begin{proof}
 Free modules are torsion-free since $R$ has no zero divisors, so their submodules are torsion-free, and by \ref{prop:criterionproj} projective modules are precisely summands of free modules.
@@ -868,7 +868,7 @@ $\Q,\Q/\Z$ are divisible, $\Z,\Z/n$ are not.
 
 \begin{lemma}
 \label{lemma:injmodarediv}
-Injective modules are divisible.
+Injective $R$-modules are divisible.
 \end{lemma}
 \begin{proof}
 Let $m\in M,r\in R\backslash\{0\}$. We need to show $\exists s\in M:m=rs$. Note that the principal ideal $I=rR$ and $R$ are isomorphic as $R$-modules: $R\rightarrow I:x\mapsto rx$. The $R$-module map $R\rightarrow M:x\mapsto xm$ composed with the inverse of that map give an $R$-module map $f:I\rightarrow M:rx\mapsto xm$.
@@ -938,7 +938,7 @@ If $R$ is a PID, then flat modules are precisely torsion-free modules.
 \textit{Week 5, lecture 3, 6th February}
 \end{flushright}
 
-\subsubsection{Enough injectives}
+\subsection{Enough injectives}
 \begin{thm}[$R$-Mod has enough injectives]
 \label{thm:enoughinjectives}
 Let $R$ be a ring. Every $R$-module is isomorphic to a submodule of an injective $R$-module.
@@ -1393,7 +1393,7 @@ An ses of $R$-modules $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ is
 \end{defn}
 
 \begin{defn}
-We say two extensions of $C$ by $A$, $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ and $0\rightarrow A\rightarrow B'\rightarrow C$, are equivalent if there is a commutative diagram
+We say two extensions of $C$ by $A$, $0\rightarrow A\rightarrow B\rightarrow C\rightarrow 0$ and $0\rightarrow A\rightarrow B'\rightarrow C$, are \textit{equivalent} if there is a commutative diagram
 \[
 \xymatrix{
 0\ar[r] & A\ar[r]\ar[d]^= & B\ar[r]\ar[d] & C\ar[r]\ar[d]^= & 0 \\
@@ -1571,7 +1571,7 @@ M_G \qquad\text{if }i=1 \\
 \end{aligned}
 \right.
 \]
-\item now let $G=C_m$ with generator $s$. Then $\cdots\rightarrow\Z[C_m]\xrightarrow{N}\Z[C_m]\xrightarrow{1-s}\Z[C_m]$ where $N=1+s+\cdots+s^{n-1}$ together with $\sigma:\Z[C_m]\twoheadrightarrow\Z$ is a projective resolution of $\Z$ by $\Z[C_m]$-modules. So
+\item now let $G=C_m$ with generator $s$. Then $\cdots\rightarrow\Z[C_m]\xrightarrow{N}\Z[C_m]\xrightarrow{1-s}\Z[C_m]$ where $N=1+s+\cdots+s^{m-1}$ together with $\sigma:\Z[C_m]\twoheadrightarrow\Z$ is a projective resolution of $\Z$ by $\Z[C_m]$-modules. So
 \begin{thm}
 \begin{enumerate}
 \item

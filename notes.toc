@@ -9,7 +9,7 @@
 \contentsline {subsection}{\numberline {2.4}Tensor products}{8}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Modules over integral domains}{10}{subsection.2.5}%
 \contentsline {subsubsection}{\numberline {2.5.1}Modules over principal ideal domains}{10}{subsubsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.2}Enough injectives}{11}{subsubsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.6}Enough injectives}{11}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Homology and cohomology}{12}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Resolutions}{12}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Derived functors}{15}{subsection.3.2}%
