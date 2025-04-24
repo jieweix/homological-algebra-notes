@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.15)  22 APR 2025 22:50
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.15)  23 APR 2025 20:39
  system commands enabled.
 **notes.tex
 (./notes.tex
@@ -1685,19 +1685,22 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 [10] <xymatrix 2x2 182>
 
-[11] <xymatrix 5x2 493> <xymatrix 6x2 534>
+[11] <xymatrix 5x2 493>
 
-[12] <xymatrix 6x2 582> <xymatrix 5x2 740>
+[12] <xymatrix 6x2 534> <xymatrix 6x2 582> <xymatrix 5x2 740>
 
 [13] <xymatrix 5x4 512> <xymatrix 5x2 365> <xymatrix 6x1 196> <xymatrix 5x6
 
 Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1142].
 
-1280> <xymatrix 5x2 365> <xymatrix 7x1 234> <xymatrix 5x2 365>
+1280> <xymatrix 5x2 365>
 
-[14] <xymatrix 7x1 234> <xymatrix 5x5 630> <xymatrix 3x4 670>
+[14] <xymatrix 7x1 234> <xymatrix 5x2 365> <xymatrix 7x1 234> <xymatrix 5x5
+630>
 
-[15] <xymatrix 5x2 344>
+[15] <xymatrix 3x4 670> <xymatrix 5x2 344>
+
+[16]
 Overfull \hbox (10.93105pt too wide) in paragraph at lines 1277--1278
 []\T1/cmbr/m/n/10 Let $\OML/cmbrm/m/it/10 n \OMS/cmbrs/m/n/10  \OT1/cmbr/m/n/1
 0 2$ \T1/cmbr/m/n/10 and $\OML/cmbrm/m/it/10 k$ \T1/cmbr/m/n/10 be a field. Con-
@@ -1709,14 +1712,11 @@ ML/cmbrm/m/it/10 x$ \T1/cmbr/m/n/10 act-ing as 0. Com-pute $[][] []$.
 
 
 
-[16]
-
 [17] <xymatrix 5x2 437> <xymatrix 2x2 182> <xymatrix 5x2 430>
 
-[18] <xymatrix 5x2 430> <xymatrix 2x2 175> <xymatrix 5x2 437> <xymatrix 5x2
-423> <xymatrix 5x2 423>
+[18] <xymatrix 5x2 430> <xymatrix 2x2 175> <xymatrix 5x2 437>
 
-[19]
+[19] <xymatrix 5x2 423> <xymatrix 5x2 423>
 
 [20]
 
@@ -1726,18 +1726,18 @@ ML/cmbrm/m/it/10 x$ \T1/cmbr/m/n/10 act-ing as 0. Com-pute $[][] []$.
 
 [23] <xymatrix 2x2 130>
 
-[24] <xymatrix 5x2 423> <xymatrix 5x1 220>
+[24] <xymatrix 5x2 423>
 
-[25]
+[25] <xymatrix 5x1 220>
 
 [26] <xymatrix 6x1 226> <xymatrix 5x5 1078>
 
-[27] <xymatrix 6x1 260> <xymatrix 4x3 76>
+[27] <xymatrix 6x1 260>
 
-[28] <xymatrix 5x1 158> <xymatrix 2x1 44> <xymatrix 6x1 196> <xymatrix 6x1
-196> <xymatrix 6x1 226> <xymatrix 7x6 268>
+[28] <xymatrix 4x3 76> <xymatrix 5x1 158> <xymatrix 2x1 44> <xymatrix 6x1 196>
+<xymatrix 6x1 196> <xymatrix 6x1 226>
 
-[29] <xymatrix 5x1 158>
+[29] <xymatrix 7x6 268> <xymatrix 5x1 158>
 
 [30] (./notes.aux)
  ***********
@@ -1755,8 +1755,8 @@ Here is how much of LuaTeX's memory you used:
    13 hlist, 2 vlist, 3 rule, 1 local_par, 10 glue, 8 kern, 1 penalty, 52 glyph,
  385 attribute, 61 glue_spec, 195 attribute_list, 2 write, 1 pdf_literal, 1 pdf_
 save, 1 pdf_restore nodes
-   avail lists: 1:2,2:3401,3:667,4:174,5:1240,6:105,7:10364,8:85,9:2893,10:19,11
-:423,12:1
+   avail lists: 1:2,2:3728,3:715,4:174,5:1418,6:105,7:9188,8:85,9:3108,10:19,11:
+423,12:1
  69968 multiletter control sequences out of 65536+600000
  83 fonts using 5153359 bytes
  99i,25n,100p,3234b,1125s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1782,10 +1782,10 @@ ryrd/stmary10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/x
 ybsql10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xydash1
 0.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xyeuat10.pfb>
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xyeubt10.pfb>
-Output written on notes.pdf (31 pages, 409352 bytes).
+Output written on notes.pdf (31 pages, 409495 bytes).
 
-PDF statistics: 666 PDF objects out of 1000 (max. 8388607)
- 606 compressed objects within 7 object streams
+PDF statistics: 665 PDF objects out of 1000 (max. 8388607)
+ 605 compressed objects within 7 object streams
  305 named destinations out of 1000 (max. 131072)
  200 words of extra memory for PDF output out of 10000 (max. 100000000)
 

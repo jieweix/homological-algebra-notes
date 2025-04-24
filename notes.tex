@@ -732,8 +732,8 @@ is exact.
 0\rightarrow\Hom_R(B,A_1)\rightarrow\Hom_R(B,A_2)\rightarrow\Hom_R(B,A_3)
 \]
 is exact.
-\item Sequence $(\ast)$ extends to an ses, i.e. $\Hom_R(A_2,B)\rightarrow\Hom_R(A_1,B)$ is surjective, iff $B$ is injective.
-\item Sequence $(\ast\ast)$ extends to an ses, i.e. $\Hom_R(A_2,B)\rightarrow\Hom_R(A_3,B)$ is surjective, iff $B$ is projective.
+\item Any sequence of the form $(\ast)$ extends to an ses, i.e. $\Hom_R(A_2,B)\rightarrow\Hom_R(A_1,B)$ is surjective, iff $B$ is injective.
+\item Any sequence of the form $(\ast\ast)$ extends to an ses, i.e. $\Hom_R(B,A_2)\rightarrow\Hom_R(B,A_3)$ is surjective, iff $B$ is projective.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -1683,7 +1683,7 @@ It's easy to check $d^2=0$, so $P_\bullet$ is a complex. To prove exactness, it 
 \begin{remark}
 \begin{enumerate}
 \item When we defined chain homotopies for complex of $R$-modules (\ref{remark:chainhomotopy}), we said that $s_n$'s are $R$-module homomorphism. Here we have a complex of $\Z[G]$-modules, but the $s_n$'s are only $\Z$-module homomorphisms. But this is okay because for any ring $R$, the forgetful functor $R\text{-Mod}\rightarrow\AbGrp$ is exact and faithful.
-\item If $G$ is a finite group, define $S_n:(g_0,\ldots,g_n)\mapsto \sum_{h\in G}(h,g_0,\ldots,g_n)$ which \textit{is} a $\Z[G]$-module map and we have $S_{n-1}d+dS_n=\sum_{h\in G}\id=$ multiplication by $m$ where $m=|G|$, i.e. multiplication by $m$ is chain homotopy to the zero map, i.e. $\times m$ kills $H^n(G,\Z)$ for all $n\geq 1$. 
+\item If $G$ is a finite group, define $S_n:(g_0,\ldots,g_n)\mapsto \sum_{h\in G}(h,g_0,\ldots,g_n)$ which \textit{is} a $\Z[G]$-module map and we have $S_{n-1}d+dS_n=\sum_{h\in G}\id=$ multiplication by $m$ where $m=|G|$, i.e. multiplication by $m$ is chain homotopic to the zero map, i.e. $\times m$ kills $H^n(G,\Z)$ for all $n\geq 1$. 
 \end{enumerate}
 \end{remark}
 
