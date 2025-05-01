@@ -2,23 +2,23 @@
 \contentsline {section}{\numberline {1}Basic category theory}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Adjoint functors}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Products and coproducts}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Modules}{3}{section.2}%
+\contentsline {section}{\numberline {2}Modules}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Complexes of $R$-modules}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Injective and projective $R$-modules}{6}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Hom, or what does projective/injective really mean?}{7}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Tensor products}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.3}Hom, or what does projective/injective really mean?}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Tensor products}{9}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Modules over integral domains}{10}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Modules over principal ideal domains}{10}{subsubsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.6}Enough injectives}{11}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.5.1}Modules over principal ideal domains}{11}{subsubsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.6}Enough injectives}{12}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Homology and cohomology}{12}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Resolutions}{12}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Derived functors}{15}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Ext and Tor functors}{16}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}First principles}{16}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}For abelian groups}{17}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3}Ext and Tor functors}{17}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}First principles}{17}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}For abelian groups}{18}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Ext as the group of extensions}{18}{subsubsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.4}Group rings}{20}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Standard resolution}{22}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Standard resolution}{23}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Inflation-restriction sequence}{24}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}Application to group theory}{25}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Lyndon--Hochschild--Serre spectral sequence}{27}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.8}Lyndon--Hochschild--Serre spectral sequence}{28}{subsection.3.8}%

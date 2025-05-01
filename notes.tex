@@ -305,9 +305,13 @@ We claim $(-)^\ab$ is the left adjoint of $\operatorname{Forg}$. Let $G\in|\oper
 \]
 is a bijection and natural in $(G,A)$.
 
-$\tau_{G,A}$ is surjective: let $f:G\rightarrow A$ be a group homomorphism. Since $A$ is abelian, $f$ kills all commutators, so $f$ factors uniquely through $G^\ab$, i.e. $\exists! g$ such that \xymatrix{
+$\tau_{G,A}$ is surjective: let $f:G\rightarrow A$ be a group homomorphism. Since $A$ is abelian, $f$ kills all commutators, so $f$ factors uniquely through $G^\ab$, i.e. $\exists! g$ such that
+\[
+\xymatrix{
 G\ar[r]^f\ar@{->>}[d] & A \\ G^\ab\ar@{.>}[ru]_{g}
-} commutes. Clearly $\tau_{G,A}(g)=f$.
+}
+\]
+commutes. Clearly $\tau_{G,A}(g)=f$.
 
 $\tau_{G,A}$ is injective since $\operatorname{Forg}$ is identity. Naturality is left as exercise.
 \end{example}
@@ -318,10 +322,14 @@ $\tau_{G,A}$ is injective since $\operatorname{Forg}$ is identity. Naturality is
 
 \subsection{Products and coproducts}
 \begin{defn}
-Let $I$ be an index set and a collection $\{C_i:i\in I\}$ of objects in $\ca$. A \textit{product} of $\{C_i:i\in I\}$ is an object $X\in|\ca|$ together with morphisms $\pi_i:X\rightarrow C_i$ for each $i\in I$ such that the following universal property holds: $\forall Y\in|\ca|$ and the family of morphisms $f_i:Y\rightarrow C_i,i\in I$, $\exists! f$ such that $\forall i\in I$, the diagram \xymatrix{
+Let $I$ be an index set and a collection $\{C_i:i\in I\}$ of objects in $\ca$. A \textit{product} of $\{C_i:i\in I\}$ is an object $X\in|\ca|$ together with morphisms $\pi_i:X\rightarrow C_i$ for each $i\in I$ such that the following universal property holds: $\forall Y\in|\ca|$ and the family of morphisms $f_i:Y\rightarrow C_i,i\in I$, $\exists! f$ such that $\forall i\in I$, the diagram
+\[
+\xymatrix{
 & C_i \\
 Y \ar@{.>}[r]_{f} \ar[ru]^{f_i} & X\ar[u]_{\pi_i}
-} commutes. Denote the product by $\prod_{i\in I}C_i$.
+}
+\]
+commutes. Denote the product by $\prod_{i\in I}C_i$.
 \end{defn}
 
 \begin{exe}
@@ -338,7 +346,11 @@ Show that if a product exists, then it is unique up to isomorphism.
 \end{example}
 
 \begin{defn}
-Let $J$ be an index set and a collection $\{C_j:j\in J\}$ of objects in $\ca$. A \textit{coproduct} of $\{C_j:j\in J\}$ is an object $X\in|\ca|$ together with morphisms $\iota_j:C_j\rightarrow X$ for each $j\in J$ such that $\forall Y\in|\ca|$ with $g_j:C_j\rightarrow Y,j\in J$, $\exists! g$ such that $\forall j\in J$, the diagram \xymatrix{C_j\ar[d]_{\iota_j} \ar[dr]^{g_j}\\ X\ar@{.>}[r]_g& Y} commutes. Denote the coproduct by $\coprod_{j\in J}C_j$.
+Let $J$ be an index set and a collection $\{C_j:j\in J\}$ of objects in $\ca$. A \textit{coproduct} of $\{C_j:j\in J\}$ is an object $X\in|\ca|$ together with morphisms $\iota_j:C_j\rightarrow X$ for each $j\in J$ such that $\forall Y\in|\ca|$ with $g_j:C_j\rightarrow Y,j\in J$, $\exists! g$ such that $\forall j\in J$, the diagram
+\[
+\xymatrix{C_j\ar[d]_{\iota_j} \ar[dr]^{g_j}\\ X\ar@{.>}[r]_g& Y}
+\]
+commutes. Denote the coproduct by $\coprod_{j\in J}C_j$.
 \end{defn}
 
 \begin{exe}
@@ -683,7 +695,11 @@ and
 \]
 \end{prop}
 \begin{proof}
-Recall the universal property that coproducts satisfy; in this case of $A_i$, we have that there are maps $\iota_i:A_i\rightarrow\bigoplus_{i\in I}A_i$ such that $\forall R$-modules $Y$ with homomorphisms $\{g_i:A_i\rightarrow Y:i\in I\},\ \exists! g:\bigoplus_{i\in I}A_i\rightarrow Y$ such that $\xymatrix{A_j\ar[rd]^{g_j}\ar[d]_{\iota_j}\\ \bigoplus_{i\in I}A_i\ar@{.>}[r]^{\exists! g} & Y}$ commutes. Then the first desired isomorphism is $f\mapsto (f\circ\iota_i)_{i\in I}$ with inverse $(f_i)_{i\in I}\mapsto\text{the unique}f$ given by the universal property (since $B$ is an $R$-module and $f_i\in\Hom_R(A_i,B)$ are homomorphisms).
+Recall the universal property that coproducts satisfy; in this case of $A_i$, we have that there are maps $\iota_i:A_i\rightarrow\bigoplus_{i\in I}A_i$ such that $\forall R$-modules $Y$ with homomorphisms $\{g_i:A_i\rightarrow Y:i\in I\},\ \exists! g:\bigoplus_{i\in I}A_i\rightarrow Y$ such that
+\[
+\xymatrix{A_j\ar[rd]^{g_j}\ar[d]_{\iota_j}\\ \bigoplus_{i\in I}A_i\ar@{.>}[r]^{\exists! g} & Y}
+\]
+commutes. Then the first desired isomorphism is $f\mapsto (f\circ\iota_i)_{i\in I}$ with inverse $(f_i)_{i\in I}\mapsto\text{the unique}f$ given by the universal property (since $B$ is an $R$-module and $f_i\in\Hom_R(A_i,B)$ are homomorphisms).
 
 The second one is similar.
 \end{proof}
@@ -1963,10 +1979,10 @@ A \textit{double (cochain) complex} $\left(A^{\bullet,\bullet},d',d''\right)$ is
 \[
 \xymatrix{
 & \vdots & \vdots & \vdots \\
-\cdots\ar[r]^{d'} & A^{i-1,j+1} \ar[r]^{d'}\ar[u]_{d''} & A^{i,j+1}\ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j+1} \ar[r]^{d'}\ar[u]_{d''} & \cdots \\
-\cdots\ar[r]^{d'} & A^{i-1,j}\ar[r]^{d'}\ar[u]_{d''} & A^{i,j} \ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j}\ar[r]^{d'}\ar[u]_{d''} & \cdots \\
-\cdots\ar[r]^{d'} & A^{i-1,j-1}\ar[r]^{d'}\ar[u]_{d''} & A^{i,j+1}\ar[r]^{d'}\ar[u]_{d''} & A^{i+1,j+1}\ar[r]^{d'}\ar[u]_{d''} & \cdots \\
-& \vdots \ar[u]_{d''}& \vdots \ar[u]_{d''} & \vdots \ar[u]_{d''}
+\cdots\ar[r]^-{d'} & A^{i-1,j+1} \ar[r]^-{d'}\ar[u]_-{d''} & A^{i,j+1}\ar[r]^-{d'}\ar[u]_-{d''} & A^{i+1,j+1} \ar[r]^-{d'}\ar[u]_-{d''} & \cdots \\
+\cdots\ar[r]^-{d'} & A^{i-1,j}\ar[r]^-{d'}\ar[u]_-{d''} & A^{i,j} \ar[r]^-{d'}\ar[u]_-{d''} & A^{i+1,j}\ar[r]^-{d'}\ar[u]_-{d''} & \cdots \\
+\cdots\ar[r]^-{d'} & A^{i-1,j-1}\ar[r]^-{d'}\ar[u]_-{d''} & A^{i,j+1}\ar[r]^-{d'}\ar[u]_-{d''} & A^{i+1,j+1}\ar[r]^-{d'}\ar[u]_-{d''} & \cdots \\
+& \vdots \ar[u]_-{d''}& \vdots \ar[u]_-{d''} & \vdots \ar[u]_-{d''}
 }
 \]
 where each row and column is a complex.
