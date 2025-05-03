@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.15)  1 MAY 2025 11:03
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.15)  1 MAY 2025 21:08
  system commands enabled.
 **notes.tex
 (./notes.tex
@@ -1692,7 +1692,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 [13] <xymatrix 5x2 740> <xymatrix 5x4 512> <xymatrix 5x2 365> <xymatrix 6x1
 196> <xymatrix 5x6
 
-Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1158].
+Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1156].
 
 1280>
 
@@ -1702,7 +1702,7 @@ Xy-pic Warning: division by 0 in \intersect@, treated as 0 [notes:1158].
 [15] <xymatrix 3x4 670> <xymatrix 5x2 344>
 
 [16]
-Overfull \hbox (10.93105pt too wide) in paragraph at lines 1293--1294
+Overfull \hbox (10.93105pt too wide) in paragraph at lines 1291--1292
 []\T1/cmbr/m/n/10 Let $\OML/cmbrm/m/it/10 n \OMS/cmbrs/m/n/10  \OT1/cmbr/m/n/1
 0 2$ \T1/cmbr/m/n/10 and $\OML/cmbrm/m/it/10 k$ \T1/cmbr/m/n/10 be a field. Con-
 sider $\OML/cmbrm/m/it/10 k$ \T1/cmbr/m/n/10 as a $\OML/cmbrm/m/it/10 k\OT1/cmb
@@ -1754,11 +1754,11 @@ Package rerunfilecheck Info: File `notes.out' has not changed.
 Here is how much of LuaTeX's memory you used:
  44902 strings out of 471941
  125129,1648299 words of node,token memory allocated
- 2215 words of node memory still in use:
-   13 hlist, 2 vlist, 3 rule, 1 local_par, 10 glue, 8 kern, 1 penalty, 52 glyph,
- 393 attribute, 61 glue_spec, 199 attribute_list, 2 write, 1 pdf_literal, 1 pdf_
+ 2202 words of node memory still in use:
+   13 hlist, 2 vlist, 3 rule, 1 local_par, 10 glue, 8 kern, 1 penalty, 51 glyph,
+ 391 attribute, 61 glue_spec, 198 attribute_list, 2 write, 1 pdf_literal, 1 pdf_
 save, 1 pdf_restore nodes
-   avail lists: 1:3,2:4213,3:730,4:181,5:1409,6:108,7:10020,8:85,9:3104,10:19,11
+   avail lists: 1:3,2:4213,3:730,4:181,5:1410,6:107,7:10020,8:85,9:3104,10:19,11
 :394,12:1
  69968 multiletter control sequences out of 65536+600000
  83 fonts using 5153359 bytes
@@ -1785,7 +1785,7 @@ ryrd/stmary10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/x
 ybsql10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xydash1
 0.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xyeuat10.pfb>
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/xypic/xyeubt10.pfb>
-Output written on notes.pdf (32 pages, 409385 bytes).
+Output written on notes.pdf (32 pages, 409287 bytes).
 
 PDF statistics: 669 PDF objects out of 1000 (max. 8388607)
  608 compressed objects within 7 object streams

@@ -672,8 +672,6 @@ We use Baer's criterion to verify that $\Q$ is an injective $\Z$-module by showi
 
 \begin{exe}
 Let $A\in|\ca|$. Show that the contravariant functor $F_A=\Hom_\ca(-,A):\ca\rightarrow\Set$ induces a covariant functor $\Psi:\ca\rightarrow\Fun(\ca^\op,\Set)$.
-
-\textit{Solution}. Naturally, $\Psi$ sends $A\in|\ca|$ to $F_A$, and $f:A\rightarrow B$ in $\ca$ to the natural transformation $\eta_f:F_A\Rightarrow F_B$ defined as follows
 \end{exe}
 
 \begin{flushright}
@@ -797,7 +795,7 @@ Hence $\otimes_R$ is covariant in each argument.
 \end{remark}
 
 \begin{defn}
-The universal property of the tensor product is that if there is a function $f:A\times B\rightarrow C$ which is linear in each argument and satisfies $f(ar,b)=f(a,rb) \ \forall a\in A,b\in B,r\in R$, then $f$ is uniquely written as $f=g\phi$ for some homomorphism $g:A\otimes_RB\rightarrow C$.
+The universal property of the tensor product is that if there is a function $f:A\times B\rightarrow C$ which is linear in each argument and satisfies $f(ar,b)=f(a,rb) \ \forall a\in A,b\in B,r\in R$, then $f$ is uniquely written as $f=g\phi$ for some homomorphism $g:A\otimes_RB\rightarrow C$ where $\phi:A\times B\rightarrow A\otimes_RB$ is naturally given by $(a,b)\mapsto a\otimes b$.
 \end{defn}
 
 \begin{lemma}
@@ -864,7 +862,7 @@ An element $m\in M$ is a \textit{torsion element} if $rm=0$ for some $r\in R\bac
 \end{defn}
 
 \begin{example}
-$\Z$ and $\Q$ are torsion-free. $\Z/n,\Q/z$ are torsion.
+$\Z$ and $\Q$ are torsion-free. $\Z/n,\ \Q/\Z$ are torsion.
 \end{example}
 
 \begin{lemma}
